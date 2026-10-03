@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Web開発を学習中の山田太郎のポートフォリオサイトです。">
+    <title>ホーム | 山田 太郎</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ホーム | 山田 太郎">
+    <meta property="og:description" content="Web開発を学習中の山田太郎のポートフォリオサイトです。">
+    <meta property="og:image" content="img/avatar.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ヘッダー（全ページ共通）：上に固定し、スクロールすると影が付く。下端に読んだ量のバー -->
+    <header class="site-header" id="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="site-name">Taro Yamada</a>
+            <!-- 表示設定のポップアップを開くボタン（popover） -->
+            <button type="button" class="icon-button settings-button" popovertarget="settings" aria-label="表示設定" data-tip="表示設定">⚙</button>
+            <!-- 狭い画面でメニューを開閉するボタン -->
+            <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="メニュー">☰</button>
+            <nav aria-label="メインメニュー">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html" aria-current="page">ホーム</a></li>
+                    <li><a href="about.html">プロフィール</a></li>
+                    <li><a href="works.html">制作実績</a></li>
+                    <li><a href="contact.html">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="progress" id="progress"></div>
+    </header>
+
+    <!-- 表示設定（ポップアップ）：選んだテーマは localStorage に保存する -->
+    <div id="settings" class="settings-popup" popover>
+        <p class="settings-title">表示設定</p>
+        <label><input type="radio" name="theme" value="auto"> OSの設定に合わせる</label>
+        <label><input type="radio" name="theme" value="light"> ライト</label>
+        <label><input type="radio" name="theme" value="dark"> ダーク</label>
+    </div>
+
+    <main class="container">
+        <section class="hero fade-in">
+            <img src="img/avatar.png" alt="山田太郎のアイコン" class="avatar" width="160" height="160">
+            <div>
+                <h1>山田 太郎</h1>
+                <p class="lead">Webアプリを作れるようになるために、HTML・CSS・JavaScript・Pythonを勉強中です。</p>
+                <p>学んだことを作品にして、このサイトで公開しています。</p>
+                <a href="works.html" class="button">制作実績を見る</a>
+            </div>
+        </section>
+
+        <section>
+            <h2>作品のピックアップ</h2>
+            <!-- スライドショー：中身は data/works.json から JavaScript で作る -->
+            <div class="slideshow fade-in" id="slideshow" aria-roledescription="スライドショー">
+                <div class="slides" id="slides"></div>
+                <button type="button" class="slide-nav prev" aria-label="前の作品">‹</button>
+                <button type="button" class="slide-nav next" aria-label="次の作品">›</button>
+            </div>
+            <div class="dots" id="dots"></div>
+            <p class="status" id="slides-status">読み込み中…</p>
+        </section>
+
+        <section>
+            <h2>できること</h2>
+            <ul class="skill-cards">
+                <li class="skill-card fade-in">
+                    <h3>HTML / CSS</h3>
+                    <p>意味の正しいHTMLと、スマホにも対応したレイアウトが書けます。</p>
+                </li>
+                <li class="skill-card fade-in">
+                    <h3>JavaScript</h3>
+                    <p>タブ・モーダル・スライドショーなどの動きを付けたり、データから画面を作ったりできます。</p>
+                </li>
+                <li class="skill-card fade-in">
+                    <h3>Python / Flask</h3>
+                    <p>現在学習中。データベースを使ったWebアプリに挑戦しています。</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>お知らせ</h2>
+            <ul class="news">
+                <li><time datetime="2026-10-01">2026年10月1日</time> サイトにタブ・モーダル・スライドショーを追加しました。</li>
+                <li><time datetime="2026-09-20">2026年9月20日</time> 制作実績に「メモ帳アプリ」を追加しました。</li>
+                <li><time datetime="2026-08-31">2026年8月31日</time> このサイトを公開しました。</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- トップへ戻るボタン：300px スクロールしたら表示する -->
+    <button type="button" class="to-top" id="to-top" aria-label="ページの先頭へ戻る" hidden>↑</button>
+
+    <footer class="site-footer">
+        <div class="container">
+            <small>&copy; 2026 Taro Yamada</small>
+        </div>
+    </footer>
+
+    <!-- common.js：全ページ共通の動き ／ ページごとのファイル：そのページだけの動き -->
+    <script src="js/common.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

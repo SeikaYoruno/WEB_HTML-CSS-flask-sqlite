@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block description %}登録されているメモの一覧です。カテゴリとキーワードで絞り込めます。{% endblock %}
+
+{% block content %}
+<h1>メモ一覧</h1>
+
+{#
+    H3：押されているボタンを aria-pressed で伝える（01_frontend/07_js_dom_events 練習問題4）
+    J4：カテゴリとキーワードの両方で絞り込む
+#}
+<div class="list-tools">
+    <div class="filters" role="group" aria-label="カテゴリで絞り込む">
+        <button type="button" data-category="all" aria-pressed="true">すべて</button>
+        <button type="button" data-category="家事" aria-pressed="false">家事</button>
+        <button type="button" data-category="仕事" aria-pressed="false">仕事</button>
+        <button type="button" data-category="趣味" aria-pressed="false">趣味</button>
+        <button type="button" data-category="アイデア" aria-pressed="false">アイデア</button>
+        <button type="button" data-category="プライベート" aria-pressed="false">プライベート</button>
+    </div>
+    <input type="search" id="keyword" class="search" placeholder="タイトル・本文で検索" aria-label="タイトル・本文で検索">
+    <p class="list-count" id="list-count" role="status"></p>
+</div>
+
+{# H1：1件のメモはそれ単体で完結する内容なので article（01_frontend/03_html_semantic_form 1節） #}
+<div class="card-grid" id="card-grid">
+    {% for memo in memos %}
+    <article class="card" data-category="{{ memo.category }}">
+        {% if current_user.is_authenticated %}
+        {# ピン留め：POST で送り、サーバーで切り替えてから一覧に戻る（02_backend/08_request・05_redirect） #}
+        <form method="post" action="{{ url_for('memos.toggle_pin', memo_id=memo.id) }}" class="pin-form">
+            {{ action_form.csrf_token }}
+            <button type="submit" class="pin-button"
+                    aria-pressed="{{ 'true' if memo.is_pinned else 'false' }}"
+                    aria-label="「{{ memo.title }}」をピン留め">{{ '★' if memo.is_pinned else '☆' }}</button>
+        </form>
+        {% endif %}
+        <a class="card-link" href="{{ url_for('memos.detail', memo_id=memo.id) }}">
+            <span class="tag">{{ memo.category }}</span>
+            <h2 class="card-title">{{ memo.title }}</h2>
+            <p class="card-body">{{ memo.body }}</p>
+            {% if memo.due_date %}<p class="card-due">期限：<time datetime="{{ memo.due_date }}">{{ memo.due_date }}</time></p>{% endif %}
+        </a>
+        {% if current_user.is_authenticated %}
+        <div class="memo-actions">
+            <a href="{{ url_for('memos.update', memo_id=memo.id) }}">編集</a>
+            {# J3：data-confirm を見た script.js が、送信の前に <dialog> で確認する #}
+            <form method="post" action="{{ url_for('memos.delete', memo_id=memo.id) }}" data-confirm="「{{ memo.title }}」を削除しますか？">
+                {{ action_form.csrf_token }}
+                <button type="submit" class="button-danger">削除</button>
+            </form>
+        </div>
+        {% endif %}
+    </article>
+    {% endfor %}
+</div>
+
+<p class="empty" id="empty" {% if memos %}hidden{% endif %}>該当するメモはありません</p>
+{% endblock %}

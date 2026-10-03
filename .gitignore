@@ -6,5 +6,11 @@ __pycache__/
 *.sqlite3
 instance/
 migrations/
+# 完成形はマイグレーション込みで配布する
+!02_backend/100_memo_api/app/migrations/
 .pytest_cache/
 .env
+.DS_Store
+
+# 補足資料（公開しない）
+bk/

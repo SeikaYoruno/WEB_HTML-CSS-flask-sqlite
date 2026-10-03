@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>カスケード・詳細度・継承</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 24px;
+        }
+
+        section {
+            border: 1px solid #e1e5eb;
+            border-radius: 6px;
+            padding: 8px 16px;
+            margin-bottom: 16px;
+        }
+
+        /* ===== 1. 後に書いたものが勝つ（詳細度が同じ場合） ===== */
+        .order {
+            color: red;
+        }
+
+        .order {
+            color: blue;   /* ← 同じ詳細度なので、後に書いたこちらが勝つ → 青 */
+        }
+
+        /* ===== 2. 詳細度：より「具体的な」セレクタが勝つ ===== */
+        /*
+            詳細度は (ID の数, クラス・属性・疑似クラスの数, 要素・疑似要素の数) で比べる
+            左の桁から順に比べて、大きい方が勝つ
+        */
+        #special {                 /* (1, 0, 0) */
+            color: purple;
+        }
+
+        .specificity p.text {      /* (0, 2, 1) */
+            color: green;
+        }
+
+        .specificity .text {       /* (0, 2, 0) */
+            color: orange;
+        }
+
+        p {                        /* (0, 0, 1) */
+            color: gray;
+        }
+
+        /* ===== 3. 継承：親に指定した値を子が引き継ぐプロパティがある ===== */
+        .inherit {
+            color: #3f6fd1;               /* color は継承される → 中の p も青 */
+            font-size: 1.1rem;            /* font 系も継承される */
+            border: 2px solid #d1723f;    /* border は継承されない → 中の p には枠線が付かない */
+        }
+
+        /* inherit：継承されないプロパティを、あえて親から受け継ぐ */
+        .inherit .force-border {
+            border: inherit;
+        }
+
+        /* ===== 4. !important（原則使わない） ===== */
+        .important-demo {
+            color: crimson !important;   /* 詳細度を無視して最優先になる。後から上書きしづらくなるので乱用しない */
+        }
+
+        #important-target {
+            color: teal;                 /* ID セレクタでも !important には勝てない */
+        }
+    </style>
+</head>
+<body>
+    <h1>カスケード・詳細度・継承</h1>
+    <p>開発者ツール（F12 / Cmd+Option+I）の「Elements」で要素を選び、「Styles」パネルを見てください。負けたスタイルには<s>取り消し線</s>が付いています。</p>
+
+    <section>
+        <h2>1. 記述順</h2>
+        <p class="order">同じセレクタが2回 → 後に書いた方（青）が勝つ</p>
+    </section>
+
+    <section class="specificity">
+        <h2>2. 詳細度</h2>
+        <p>p だけ (0,0,1) → 灰</p>
+        <p class="text">.specificity p.text (0,2,1) が .specificity .text (0,2,0) に勝つ → 緑</p>
+        <p class="text" id="special">#special (1,0,0) がすべてに勝つ → 紫</p>
+        <p class="text" style="color: brown;">style属性はどのセレクタよりも強い → 茶</p>
+    </section>
+
+    <section class="inherit">
+        <h2>3. 継承</h2>
+        <p>親の color と font-size を引き継ぐ（でも p で color: gray を指定しているので灰色になる → 直接指定は継承より強い）</p>
+        <span>span には p のルールが無いので親の青色を継承する</span>
+        <p class="force-border">border: inherit で親の枠線をあえて引き継ぐ</p>
+    </section>
+
+    <section>
+        <h2>4. !important</h2>
+        <p class="important-demo" id="important-target">ID セレクタ（teal）より !important（crimson）が勝つ</p>
+    </section>
+</body>
+</html>

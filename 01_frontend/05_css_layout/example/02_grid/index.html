@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grid</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 24px;
+            color: #262b33;
+        }
+
+        code {
+            background: #eef3ff;
+            padding: 1px 4px;
+        }
+
+        .grid {
+            display: grid;            /* ← この要素が「gridコンテナ」、直下の子が「gridアイテム」 */
+            gap: 8px;
+            background: #f4f6f9;
+            border: 1px dashed #9aa5b8;
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+
+        .grid > div {
+            background: #3f6fd1;
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* ===== 1. 列の定義 ===== */
+        .fixed    { grid-template-columns: 100px 200px 100px; }   /* 固定幅 */
+        .fr       { grid-template-columns: 1fr 2fr 1fr; }         /* fr = 余った幅を比率で分ける */
+        .repeat   { grid-template-columns: repeat(4, 1fr); }      /* 1fr を4回 = 4等分 */
+        .sidebar  { grid-template-columns: 200px 1fr; }           /* 固定のサイドバー + 残り全部 */
+
+        /* ===== 2. 列数を自動で決める（メディアクエリなしのレスポンシブ） ===== */
+        /*
+            minmax(160px, 1fr)：最小160px、最大は 1fr（余った幅を分け合う）
+            auto-fill：入るだけ列を作る（アイテムが少ないと空の列が残る）
+            auto-fit ：アイテムが少ないときは、空の列を潰してアイテムを広げる
+        */
+        .auto-fill { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+        .auto-fit  { grid-template-columns: repeat(auto-fit,  minmax(160px, 1fr)); }
+
+        /* ===== 3. アイテムを複数マスにまたがらせる ===== */
+        .span-demo {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .span-demo .wide {
+            grid-column: span 2;           /* 横に2マス分 */
+            background: #d1723f;
+        }
+
+        .span-demo .tall {
+            grid-row: span 2;              /* 縦に2マス分 */
+            background: #2f9e44;
+        }
+
+        .span-demo .full {
+            grid-column: 1 / -1;           /* 1本目の線から最後の線まで = 横幅いっぱい */
+            background: #7a5af8;
+        }
+
+        /* ===== 4. grid-template-areas でページ全体のレイアウト ===== */
+        .page {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            grid-template-rows: auto 1fr auto;
+            /* 名前を付けた領域を「絵」のように配置する */
+            grid-template-areas:
+                "header header"
+                "side   main"
+                "footer footer";
+            gap: 8px;
+            min-height: 300px;
+        }
+
+        .page > * {
+            padding: 12px;
+            border-radius: 4px;
+            color: #ffffff;
+        }
+
+        .page header { grid-area: header; background: #3f6fd1; }
+        .page aside  { grid-area: side;   background: #6b7280; }
+        .page main   { grid-area: main;   background: #2f9e44; }
+        .page footer { grid-area: footer; background: #262b33; }
+
+        /* 画面が狭いときは縦1列に積む（4. レスポンシブ対応で詳しく学ぶ） */
+        @media (max-width: 600px) {
+            .page {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "header"
+                    "main"
+                    "side"
+                    "footer";
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Grid</h1>
+    <p>Gridは<strong>2方向（行と列）</strong>を同時に扱うレイアウト方式です。</p>
+
+    <h2>1. 列の定義（grid-template-columns）</h2>
+    <p><code>100px 200px 100px</code></p>
+    <div class="grid fixed"><div>A</div><div>B</div><div>C</div></div>
+    <p><code>1fr 2fr 1fr</code></p>
+    <div class="grid fr"><div>1fr</div><div>2fr</div><div>1fr</div></div>
+    <p><code>repeat(4, 1fr)</code>（5個目以降は自動で次の行へ）</p>
+    <div class="grid repeat"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div></div>
+    <p><code>200px 1fr</code></p>
+    <div class="grid sidebar"><div>サイドバー</div><div>メイン（残り全部）</div></div>
+
+    <h2>2. auto-fill / auto-fit + minmax</h2>
+    <p>ウィンドウ幅を変えると列数が自動で変わります。アイテムが少ないときの違いに注目してください。</p>
+    <p><code>repeat(auto-fill, minmax(160px, 1fr))</code></p>
+    <div class="grid auto-fill"><div>1</div><div>2</div></div>
+    <p><code>repeat(auto-fit, minmax(160px, 1fr))</code></p>
+    <div class="grid auto-fit"><div>1</div><div>2</div></div>
+
+    <h2>3. span（複数マスにまたがる）</h2>
+    <div class="grid span-demo">
+        <div class="wide">span 2（横）</div>
+        <div class="tall">span 2（縦）</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div class="full">1 / -1（横幅いっぱい）</div>
+    </div>
+
+    <h2>4. grid-template-areas</h2>
+    <div class="page">
+        <header>header</header>
+        <aside>aside</aside>
+        <main>main</main>
+        <footer>footer</footer>
+    </div>
+
+    <h2>Flexbox と Grid の使い分け</h2>
+    <ul>
+        <li><strong>Flexbox</strong>：1列に並べる（ナビ・ボタンの並び・カードの中身）</li>
+        <li><strong>Grid</strong>：行と列で格子状に並べる（カード一覧・ページ全体の骨組み）</li>
+        <li>両方を組み合わせるのが普通（ページの骨組みはGrid、ヘッダーの中はFlexboxなど）</li>
+    </ul>
+</body>
+</html>

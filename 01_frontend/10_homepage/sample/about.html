@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="山田太郎のプロフィール・スキル・経歴です。">
+    <title>プロフィール | 山田 太郎</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="プロフィール | 山田 太郎">
+    <meta property="og:description" content="山田太郎のプロフィール・スキル・経歴です。">
+    <meta property="og:image" content="img/avatar.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ヘッダー（全ページ共通）：上に固定し、スクロールすると影が付く。下端に読んだ量のバー -->
+    <header class="site-header" id="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="site-name">Taro Yamada</a>
+            <!-- 表示設定のポップアップを開くボタン（popover） -->
+            <button type="button" class="icon-button settings-button" popovertarget="settings" aria-label="表示設定" data-tip="表示設定">⚙</button>
+            <!-- 狭い画面でメニューを開閉するボタン -->
+            <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="メニュー">☰</button>
+            <nav aria-label="メインメニュー">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="about.html" aria-current="page">プロフィール</a></li>
+                    <li><a href="works.html">制作実績</a></li>
+                    <li><a href="contact.html">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="progress" id="progress"></div>
+    </header>
+
+    <!-- 表示設定（ポップアップ）：選んだテーマは localStorage に保存する -->
+    <div id="settings" class="settings-popup" popover>
+        <p class="settings-title">表示設定</p>
+        <label><input type="radio" name="theme" value="auto"> OSの設定に合わせる</label>
+        <label><input type="radio" name="theme" value="light"> ライト</label>
+        <label><input type="radio" name="theme" value="dark"> ダーク</label>
+    </div>
+
+    <main class="container">
+        <h1>プロフィール</h1>
+
+        <!-- タブ切り替え：選ばれていないパネルは hidden で隠す -->
+        <div class="tabs" id="profile-tabs">
+            <div class="tab-list" role="tablist" aria-label="プロフィール">
+                <button type="button" role="tab" id="tab-basic" aria-controls="panel-basic" aria-selected="true">基本情報</button>
+                <button type="button" role="tab" id="tab-skills" aria-controls="panel-skills" aria-selected="false" tabindex="-1">スキル</button>
+                <button type="button" role="tab" id="tab-history" aria-controls="panel-history" aria-selected="false" tabindex="-1">経歴</button>
+            </div>
+
+            <section class="tab-panel" role="tabpanel" id="panel-basic" aria-labelledby="tab-basic">
+                <h2>基本情報</h2>
+                <dl class="profile">
+                    <dt>名前</dt>
+                    <dd>山田 太郎（やまだ たろう）</dd>
+                    <dt>住まい</dt>
+                    <dd>東京都</dd>
+                    <dt>趣味</dt>
+                    <dd>読書・散歩・カフェめぐり</dd>
+                </dl>
+            </section>
+
+            <section class="tab-panel" role="tabpanel" id="panel-skills" aria-labelledby="tab-skills" hidden>
+                <h2>スキル</h2>
+                <p class="hint">技術名にマウスを乗せる（またはTabキーで選ぶ）と、説明が表示されます。</p>
+                <table class="skills">
+                    <caption>使える技術と学習期間</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">技術</th>
+                            <th scope="col">レベル</th>
+                            <th scope="col">学習期間</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><button type="button" class="term" data-tip="ページの構造と見た目を作る言語">HTML / CSS</button></th>
+                            <td>ひとりでページを作れる</td>
+                            <td>6か月</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><button type="button" class="term" data-tip="ブラウザの中でページに動きを付ける言語">JavaScript</button></th>
+                            <td>DOM操作・イベント処理・fetch() ができる</td>
+                            <td>4か月</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><button type="button" class="term" data-tip="サーバー側のプログラムに使う言語。Flaskで使う">Python</button></th>
+                            <td>基本文法・Flaskの基礎</td>
+                            <td>2か月</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="tab-panel" role="tabpanel" id="panel-history" aria-labelledby="tab-history" hidden>
+                <h2>経歴</h2>
+                <ol class="timeline">
+                    <li><time datetime="2026-03">2026年3月</time> プログラミングの学習を始める</li>
+                    <li><time datetime="2026-06">2026年6月</time> 初めての作品（タイピング練習ゲーム）を完成</li>
+                    <li><time datetime="2026-08">2026年8月</time> このポートフォリオサイトを公開</li>
+                    <li><time datetime="2026-10">2026年10月</time> サイトにタブ・モーダル・スライドショーを追加</li>
+                </ol>
+            </section>
+        </div>
+    </main>
+
+    <!-- トップへ戻るボタン：300px スクロールしたら表示する -->
+    <button type="button" class="to-top" id="to-top" aria-label="ページの先頭へ戻る" hidden>↑</button>
+
+    <footer class="site-footer">
+        <div class="container">
+            <small>&copy; 2026 Taro Yamada</small>
+        </div>
+    </footer>
+
+    <!-- common.js：全ページ共通の動き ／ ページごとのファイル：そのページだけの動き -->
+    <script src="js/common.js"></script>
+    <script src="js/about.js"></script>
+</body>
+</html>

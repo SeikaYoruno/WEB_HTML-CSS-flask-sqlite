@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>解答2：レシピのページ</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 640px;
+            margin: 24px auto;
+            padding: 0 16px;
+            line-height: 1.7;
+        }
+
+        h2 {
+            border-bottom: 2px solid #3f6fd1;
+            margin-top: 40px;
+        }
+
+        dt {
+            font-weight: bold;
+        }
+
+        /* 縦に長くして、ページ内リンクで移動したことがわかるようにする */
+        body {
+            padding-bottom: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ホットケーキの作り方</h1>
+
+    <p>[目次] <a href="#ingredients">材料へ</a> / <a href="#steps">作り方へ</a></p>
+
+    <!-- 画像が表示できないとき・読み上げのときに伝わるよう、内容を説明する alt を書く -->
+    <img src="img/sample.png" alt="焼き上がったホットケーキ" width="150" height="150">
+
+    <!-- 見た目を太くしたいのではなく「重要」という意味なので strong -->
+    <p>休日の朝にぴったりの、ふわふわのホットケーキです。<strong>焦がさないこと</strong>が一番大事です。</p>
+
+    <h2 id="ingredients">材料（2枚分）</h2>
+    <ul>
+        <li>ホットケーキミックス 150g</li>
+        <li>卵 1個</li>
+        <li>牛乳 100ml</li>
+    </ul>
+
+    <h2 id="steps">作り方</h2>
+    <ol>
+        <li>ボウルに卵と牛乳を入れて混ぜる</li>
+        <li>
+            ホットケーキミックスを加えて、さっくり混ぜる
+            <!-- 入れ子のリストは、親の li の「中」に書く（ol の直下に ul を置かない） -->
+            <ul>
+                <li>混ぜすぎない</li>
+                <li>粉っぽさが少し残るくらいでOK</li>
+            </ul>
+        </li>
+        <li>弱火で3分焼き、裏返して2分焼く</li>
+    </ol>
+
+    <h2>用語</h2>
+    <dl>
+        <dt>さっくり混ぜる</dt>
+        <dd>ヘラで切るように、練らずに混ぜること</dd>
+        <dt>弱火</dt>
+        <dd>炎の先がフライパンの底に当たらない程度の火加減</dd>
+    </dl>
+
+    <!-- target="_blank" には rel="noopener noreferrer" をセットで付ける -->
+    <p>参考：<a href="https://developer.mozilla.org/ja/" target="_blank" rel="noopener noreferrer">MDN Web Docs（新しいタブで開く）</a></p>
+</body>
+</html>

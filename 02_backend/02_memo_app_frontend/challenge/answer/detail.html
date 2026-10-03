@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="メモの詳細です。">
+    <title>メモの詳細 - メモ帳</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 保存した配色を、CSSが当たる前に反映する（01_frontend/09_js_data 4節の「応用」） -->
+    <script>
+        try {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.dataset.theme = savedTheme;
+            }
+        } catch (error) {
+            // localStorage が使えない環境では、OS の設定（prefers-color-scheme）に従う
+        }
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="メインメニュー">
+            <a class="site-name" href="index.html">メモ帳</a>
+            <div class="nav-tools">
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="配色を切り替える">◐</button>
+                <button type="button" class="hamburger" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">メモ一覧</a></li>
+                <li><a href="new.html">メモを追加</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <p class="lead" id="detail-status" role="status">読み込み中…</p>
+
+        <!-- detail.js が、URL の ?id= のメモを探して中身を入れる -->
+        <article class="detail" id="detail" hidden>
+            <span class="tag" id="detail-category"></span>
+            <h1 id="detail-title"></h1>
+            <p id="detail-body"></p>
+            <dl class="detail-meta" id="detail-meta">
+                <dt>期限</dt>
+                <dd><time id="detail-due"></time></dd>
+            </dl>
+            <div class="memo-actions">
+                <a id="detail-edit" href="#">編集</a>
+                <button type="button" class="button-danger" id="detail-delete">削除</button>
+            </div>
+        </article>
+
+        <a class="back-link" href="index.html">メモ一覧へ戻る</a>
+    </main>
+
+    <footer class="site-footer">
+        <small>&copy; メモ帳</small>
+    </footer>
+
+    <!-- 自動で消える通知（01_frontend/08_js_ui 2節）。common.js の showToast() で使う -->
+    <div id="toast" class="toast" popover="manual" role="status"></div>
+
+    <!-- 確認ダイアログ（01_frontend/08_js_ui 3節）。common.js の openConfirm() で使う -->
+    <dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-message">
+        <div class="dialog-body">
+            <p id="confirm-message"></p>
+            <div class="dialog-actions">
+                <button type="button" class="button-secondary" id="confirm-cancel">キャンセル</button>
+                <button type="button" class="button-danger" id="confirm-ok">OK</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- トップへ戻るボタン（01_frontend/08_js_ui 5節） -->
+    <button type="button" class="to-top" id="to-top" aria-label="ページの先頭へ戻る" hidden>↑</button>
+
+    <!-- 役割ごとに分けたJavaScriptを、上から順に読み込む（storage.js・common.js の関数を後のファイルで使うため、順番が大事） -->
+    <script src="js/storage.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/detail.js"></script>
+</body>
+</html>

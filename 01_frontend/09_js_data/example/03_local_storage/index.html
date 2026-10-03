@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>3. localStorage</title>
+    <style>
+        body { font-family: sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; color: #262b33; }
+        section { border: 1px solid #e1e5eb; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; }
+        textarea { width: 100%; height: 100px; box-sizing: border-box; padding: 6px; }
+        .saved { color: #2f8a4a; font-size: 0.85rem; min-height: 1.2em; }
+    </style>
+</head>
+<body>
+    <h1>localStorage</h1>
+    <p>入力してからページをリロード（またはタブを閉じて開き直す）しても、内容が残ることを確認してください。</p>
+
+    <section>
+        <h2>1. 訪問回数（数値を保存する）</h2>
+        <p>このページを開いた回数：<strong id="visit-count"></strong>回</p>
+    </section>
+
+    <section>
+        <h2>2. 下書きの自動保存（文字列を保存する）</h2>
+        <textarea id="draft" placeholder="ここに入力すると自動で保存されます"></textarea>
+        <p class="saved" id="saved-message"></p>
+    </section>
+
+    <section>
+        <h2>3. 設定の保存（オブジェクトをJSONにして保存する）</h2>
+        <label><input type="checkbox" id="setting-large"> 文字を大きくする</label>
+    </section>
+
+    <button type="button" id="clear">保存したデータをすべて消す</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+body {
+    max-width: 560px;
+    margin: 32px auto;
+    padding: 0 16px;
+    font-family: sans-serif;
+    color: #262b33;
+    background: #f4f6f9;
+}
+
+.add {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.add input {
+    flex: 1;
+}
+
+input,
+button {
+    padding: 8px;
+    font: inherit;
+}
+
+button {
+    border: none;
+    border-radius: 6px;
+    background: #3f6fd1;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.memos {
+    padding: 0;
+    list-style: none;
+}
+
+.memos li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.memos form {
+    margin: 0;
+}
+
+.delete {
+    background: #d1495b;
+}

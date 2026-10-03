@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}メモを編集 - メモ帳{% endblock %}
+{% block description %}メモ「{{ memo.title }}」を編集するページです。{% endblock %}
+
+{% block content %}
+<h1>メモを編集</h1>
+{# 編集では下書き保存はしない（保存済みの内容があるため） #}
+{% with draft_key = None %}{% include "memos/_form.html" %}{% endwith %}
+<p><a class="back-link" href="{{ url_for('memos.detail', memo_id=memo.id) }}">「{{ memo.title }}」の詳細に戻る</a></p>
+{% endblock %}

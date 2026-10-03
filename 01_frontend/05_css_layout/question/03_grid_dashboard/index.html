@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>問題3：Gridとレスポンシブ</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background: #f4f6f9;
+            color: #262b33;
+        }
+
+        /* ===== ページ全体の骨組み（スマホ用） ===== */
+        .layout {
+            min-height: 100vh;
+            gap: 16px;
+            padding: 16px;
+            /* TODO 1 */
+        }
+
+        .layout > * {
+            background: #ffffff;
+            border: 1px solid #e1e5eb;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        /* TODO 2 */
+
+        /* ===== 数値カード（スマホ：2列） ===== */
+        .stats {
+            /* TODO 3 */
+        }
+
+        .stat {
+            background: #e8edfb;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.5rem;
+            color: #3f6fd1;
+        }
+
+        /* ===== メモ一覧 ===== */
+        .memo-list {
+            /* TODO 4 */
+        }
+
+        .memo {
+            border: 1px solid #e1e5eb;
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .memo h3 {
+            margin: 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .memo p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 0.85rem;
+        }
+
+        /* ===== PC用（768px以上） ===== */
+        /* TODO 5 */
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <header class="header">
+            <strong>メモ帳ダッシュボード</strong>
+        </header>
+
+        <section class="stats" aria-label="統計">
+            <div class="stat"><strong>12</strong>メモ</div>
+            <div class="stat"><strong>5</strong>カテゴリ</div>
+            <div class="stat"><strong>3</strong>今週</div>
+            <div class="stat"><strong>2</strong>ピン留め</div>
+        </section>
+
+        <main class="memos">
+            <h2>最近のメモ</h2>
+            <div class="memo-list">
+                <article class="memo"><h3>買い物リスト</h3><p>牛乳、卵、パン</p></article>
+                <article class="memo"><h3>企画会議メモ</h3><p>新商品の販促案</p></article>
+                <article class="memo"><h3>読書メモ</h3><p>銀河鉄道の夜</p></article>
+                <article class="memo"><h3>アプリのアイデア</h3><p>習慣トラッカー</p></article>
+            </div>
+        </main>
+
+        <aside class="side">
+            <h2>カテゴリ</h2>
+            <ul>
+                <li>家事</li>
+                <li>仕事</li>
+                <li>趣味</li>
+            </ul>
+        </aside>
+
+        <footer class="footer">
+            <small>&copy; メモ帳</small>
+        </footer>
+    </div>
+</body>
+</html>

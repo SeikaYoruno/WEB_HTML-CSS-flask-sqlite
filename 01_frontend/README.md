@@ -1,0 +1,54 @@
+# フロントエンド編
+
+ブラウザの中で動く**HTML**（構造）・**CSS**（見た目）・**JavaScript**（動き）を学びます。Python・Flaskはまだ使いません。
+
+## ゴール
+
+**自分を紹介するオリジナルHPの完成**がフロントエンド編のゴールです。4ページ以上のサイトを、各章の「制作課題」で少しずつ作り、10_homepage で仕上げます（補足として公開方法も紹介）。作る場所は[00_my_homepage/](00_my_homepage/)です。
+
+ここで学ぶHTML・CSS・JavaScriptは、バックエンド編の最初の章 [02_backend/02_memo_app_frontend](../02_backend/02_memo_app_frontend/) で、ブラウザだけで動くメモ帳アプリを作るときにそのまま使います。
+
+## 章の構成
+
+| 章 | 学ぶこと | オリジナルHP（制作課題） |
+|---|---|---|
+| [01_web_basic](01_web_basic/) | Webページが表示されるしくみ（リクエストとレスポンス・URL・ステータスコード・HTTPS・IPアドレス・開発者ツールのNetworkタブ） | — |
+| [02_html_basics](02_html_basics/) | 開発環境と開発者ツール・HTML文書の骨組み・テキストと基本タグ・表 | — |
+| [03_html_semantic_form](03_html_semantic_form/) | セマンティックHTMLとアクセシビリティ・フォーム | ステップ1：4ページのHTML |
+| [04_css_basics](04_css_basics/) | CSSの書き方と単位・セレクタ・カスケードと詳細度・ボックスモデル・文字と装飾 | — |
+| [05_css_layout](05_css_layout/) | Flexbox・Grid・position・レスポンシブ対応・CSS変数とトランジション | ステップ2：`style.css` |
+| [06_js_basics](06_js_basics/) | JavaScriptの読み込みとデバッグ・基本文法・真偽の判定・関数とコールバック・配列メソッド | — |
+| [07_js_dom_events](07_js_dom_events/) | DOM操作・イベント（ホバー・フォーカス・submit）・クライアント側での絞り込み | ステップ3：`script.js` |
+| [08_js_ui](08_js_ui/) | タブ切り替え・ポップアップ（`popover`）・モーダルウィンドウ（`<dialog>`）・スライドショー・スクロール動作 | （自由課題で使う） |
+| [09_js_data](09_js_data/) | JSON・`fetch()`・`async`/`await`・エラー処理・`localStorage`・データから画面を作る・HTTPメソッドの体験（JSONPlaceholder） | ステップ4：データの分離 |
+| [10_homepage](10_homepage/) | ファビコン・OGP・画像の最適化・品質チェック・GitHub Pagesでの公開（補足）・全機能を盛り込んだ完成版の作例（`sample/`） | ステップ5：**完成** |
+
+## 各章の構成
+
+| フォルダ | 内容 |
+|---|---|
+| `README.md` | 学習内容（各節に「動作確認」の表あり） |
+| `example/` | 各節のサンプル。**1つのサンプルが1つのフォルダ**（例：`example/01_structure/`）になっていて、中の`index.html`をブラウザで開き、書き換えながら動きを確かめる |
+| `question/` | 練習問題。**1つの問題が1つのフォルダ**（例：`question/01_profile_page/`）。解答は`question/answer/`の下の、問題と同じ名前のフォルダにある。問題文はREADMEの各節の最後（「練習問題◯」）にあり、学ぶ順に取り組める。ファイルには、書く場所を示す`TODO`の目印だけを置いている |
+
+サンプル・問題のフォルダの中は、どれも同じ名前のファイルでできています。
+
+| ファイル | 内容 |
+|---|---|
+| `index.html` | ブラウザで開くページ |
+| `script.js` | JavaScript（06_js_basics 以降） |
+| `css/style.css` | 外部CSSファイル（04_css_basics の練習問題1・サンプル1など、一部だけ） |
+| `img/`・`data/` | そのページで使う画像・JSONデータ |
+| `challenge/` | 制作課題（オリジナルHP）の雛形。架空の人物「山田 太郎」のサイトを題材に、TODOコメントに沿って書く。完成例は`answer/`。練習のあと、同じことを[00_my_homepage/](00_my_homepage/)の自分のHPに反映する |
+
+## ページの開き方
+
+ブラウザ・VS Code・拡張機能（Live Server）・Pythonの用意は、[00_docs/setup/frontend.md](../00_docs/setup/frontend.md)にまとめています。章をまたいで出てくる用語は、[00_docs/glossary](../00_docs/glossary/)（用語集）で引けます。
+
+02〜08章のページは、HTMLファイルをブラウザで直接開くだけで動きます。09_js_data・10_homepageの`fetch()`を使うページは、簡易サーバーを起動して開きます（09_js_data の0節を参照）。
+
+```bash
+cd 01_frontend/09_js_data
+python -m http.server 8000
+# → http://localhost:8000/
+```

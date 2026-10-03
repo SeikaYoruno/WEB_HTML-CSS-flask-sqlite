@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>問題1：セマンティックHTML</title>
+    <style>
+        body { font-family: sans-serif; max-width: 720px; margin: 24px auto; padding: 0 16px; }
+        .header { background: #3f6fd1; color: #fff; padding: 12px 16px; border-radius: 8px; }
+        .nav a { color: #fff; margin-right: 12px; }
+        .nav ul { list-style: none; padding: 0; margin: 8px 0 0; display: flex; gap: 12px; }
+        .post-title { font-size: 1.8rem; font-weight: bold; margin: 24px 0 4px; }
+        .post-heading { font-size: 1.3rem; font-weight: bold; margin: 16px 0 4px; }
+        .side { background: #f4f6f9; padding: 12px; border-radius: 8px; margin-top: 24px; }
+        .footer { text-align: center; color: #6b7280; margin-top: 24px; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div><b>メモ帳ブログ</b></div>
+        <div class="nav">
+            <a href="#">ホーム</a>
+            <a href="#">記事一覧</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="post">
+            <div class="post-title">メモを習慣にするコツ</div>
+            <div>2026年10月1日</div>
+
+            <div class="post-heading">書く場所を1つに決める</div>
+            <div>メモがあちこちに散らばると見返さなくなります。これが<b>とても大事</b>です。</div>
+
+            <div class="post-heading">カテゴリを付ける</div>
+            <div>あとで探しやすくなります。</div>
+            <img src="img/sample.png" width="120" height="120">
+        </div>
+
+        <div class="side">
+            <div><b>関連記事</b></div>
+            <a href="#">買い物リストの作り方</a>
+        </div>
+    </div>
+
+    <div class="footer">&copy; 2026 メモ帳ブログ</div>
+</body>
+</html>

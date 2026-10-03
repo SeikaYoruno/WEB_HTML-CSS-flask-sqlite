@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ memo.title }} - メモ帳{% endblock %}
+{% block description %}メモ「{{ memo.title }}」の詳細です。{% endblock %}
+
+{% block content %}
+{# H1：article と time（01_frontend/03_html_semantic_form 1節） #}
+<article class="detail">
+    <span class="tag">{{ memo.category }}</span>
+    <h1>{% if memo.is_pinned %}★ {% endif %}{{ memo.title }}</h1>
+    <p>{{ memo.body }}</p>
+
+    {% if memo.due_date %}
+    <dl class="detail-meta">
+        <dt>期限</dt>
+        <dd><time datetime="{{ memo.due_date }}">{{ memo.due_date }}</time></dd>
+    </dl>
+    {% endif %}
+
+    {% if current_user.is_authenticated %}
+    <div class="memo-actions">
+        <a href="{{ url_for('memos.update', memo_id=memo.id) }}">編集</a>
+        <form method="post" action="{{ url_for('memos.toggle_pin', memo_id=memo.id) }}">
+            {{ action_form.csrf_token }}
+            <button type="submit" class="button-secondary">{{ 'ピン留めを外す' if memo.is_pinned else 'ピン留めする' }}</button>
+        </form>
+        <form method="post" action="{{ url_for('memos.delete', memo_id=memo.id) }}" data-confirm="「{{ memo.title }}」を削除しますか？">
+            {{ action_form.csrf_token }}
+            <button type="submit" class="button-danger">削除</button>
+        </form>
+    </div>
+    {% endif %}
+
+    <a class="back-link" href="{{ url_for('memos.index') }}">メモ一覧へ戻る</a>
+</article>
+{% endblock %}

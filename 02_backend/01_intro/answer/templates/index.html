@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>メモ帳</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>メモ帳</h1>
+
+    <!-- 追加フォーム：入力した text を、POST で /memos に送る -->
+    <form class="add" method="post" action="/memos">
+        <input type="text" name="text" placeholder="メモを入力" required>
+        <button type="submit">追加</button>
+    </form>
+
+    <!-- 一覧：Python から渡された memos を、1件ずつ表示する -->
+    <ul class="memos">
+        {% for memo in memos %}
+        <li>
+            <span>{{ memo['text'] }}</span>
+            <!-- 削除ボタン：POST で /memos/番号/delete に送る -->
+            <form method="post" action="/memos/{{ memo['id'] }}/delete">
+                <button type="submit" class="delete">削除</button>
+            </form>
+        </li>
+        {% else %}
+        <li>メモはまだありません</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

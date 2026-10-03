@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- TODO（02_html_basics 1節）：このページの説明文を <meta name="description" content="..."> で書く -->
+    <title>プロフィール | 山田 太郎</title>
+</head>
+<body>
+    <!--
+        制作課題ステップ1：プロフィールページ（about.html）
+        README「制作課題：オリジナルHP（ステップ1）」の必須要件を満たすように、TODO を埋めてください。
+        完成例は answer/ にあります（架空の人物「山田 太郎」のサイト）。
+        CSS は 05_css_layout で付けるので、ここではクラス名をコメントのとおりに付けておくだけで構いません。
+    -->
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <!-- TODO（02_html_basics 2節・この章の1節）：
+                 - サイト名 <a href="index.html" class="site-name">Taro Yamada</a>
+                 - <nav aria-label="メインメニュー"> の中に <ul class="nav-links" id="nav-links"> で4ページへのリンク
+                   （ホーム index.html・プロフィール about.html・制作実績 works.html・お問い合わせ contact.html）
+                 - 今いるページ（about.html）のリンクにだけ aria-current="page" を付ける -->
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>プロフィール</h1>
+
+        <!-- TODO（02_html_basics 2節）：<section> に h2「基本情報」と、<dl class="profile">（dt と dd の組を3つ以上） -->
+
+        <!-- TODO（02_html_basics 3節）：<section> に h2「スキル」と、<table class="skills"> を書く
+             - caption（表のタイトル）
+             - thead：th scope="col" で「技術」「レベル」「学習期間」
+             - tbody：各行の先頭（技術名）は th scope="row" -->
+
+        <!-- TODO（02_html_basics 2節・この章の1節）：<section> に h2「経歴」と、<ol class="timeline"> を書く。各項目の先頭に time 要素 -->
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <!-- TODO：コピーライトを <small>&copy; 2026 Taro Yamada</small> のように書く -->
+        </div>
+    </footer>
+</body>
+</html>

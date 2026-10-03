@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <!-- これが無いと、スマホはページを「PC幅で描いて縮小表示」してしまい、メディアクエリが意図通りに効かない -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>レスポンシブ対応</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            color: #262b33;
+        }
+
+        .container {
+            /* 画面が広くても 960px より広がらず、狭いときは左右に 16px の余白 */
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* ===== 1. 流動的な文字サイズ：clamp(最小, 推奨, 最大) ===== */
+        h1 {
+            font-size: clamp(1.5rem, 4vw + 1rem, 2.75rem);
+        }
+
+        /* ===== 2. 画像を親の幅からはみ出させない（定番の1行） ===== */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ===== 3. モバイルファースト：まずスマホ用（1列）を書く ===== */
+        .box-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .box {
+            background: #3f6fd1;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 6px;
+        }
+
+        /* 画面幅が 600px「以上」になったら2列 */
+        @media (min-width: 600px) {
+            .box-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 画面幅が 900px「以上」になったら3列 */
+        @media (min-width: 900px) {
+            .box-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ===== 4. ナビゲーションの切り替え ===== */
+        .nav {
+            display: flex;
+            flex-direction: column;   /* スマホ：縦に積む */
+            gap: 8px;
+            background: #262b33;
+            padding: 12px 16px;
+        }
+
+        .nav a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        @media (min-width: 600px) {
+            .nav {
+                flex-direction: row;  /* タブレット以上：横に並べる */
+                gap: 24px;
+            }
+        }
+
+        /* 今どのブレークポイントにいるかを表示する（学習用） */
+        .indicator::after {
+            content: "スマホ幅（〜599px）：1列";
+            font-weight: bold;
+        }
+
+        @media (min-width: 600px) {
+            .indicator::after {
+                content: "タブレット幅（600〜899px）：2列";
+            }
+        }
+
+        @media (min-width: 900px) {
+            .indicator::after {
+                content: "PC幅（900px〜）：3列";
+            }
+        }
+
+        .indicator {
+            background: #fff3cd;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#">ホーム</a>
+        <a href="#">メモ一覧</a>
+        <a href="#">設定</a>
+    </nav>
+
+    <div class="container">
+        <h1>レスポンシブ対応</h1>
+        <p class="indicator">現在：</p>
+
+        <div class="box-grid">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+            <div class="box">4</div>
+            <div class="box">5</div>
+            <div class="box">6</div>
+        </div>
+
+        <h2>画像</h2>
+        <!-- width="1200" と大きいが、max-width: 100% により親の幅に収まる -->
+        <img src="img/sample.png" alt="サンプル画像" width="1200" height="1200">
+    </div>
+</body>
+</html>

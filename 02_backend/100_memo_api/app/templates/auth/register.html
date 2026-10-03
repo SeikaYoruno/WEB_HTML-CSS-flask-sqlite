@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}新規登録 - メモ帳{% endblock %}
+{% block description %}メモ帳のアカウントを作成するページです。{% endblock %}
+
+{% block content %}
+<h1>新規登録</h1>
+
+<form method="post">
+    {{ form.csrf_token }}
+
+    <div class="field">
+        {{ form.username.label }}
+        {{ form.username(required=True, maxlength=50, autocomplete="username") }}
+        {% if form.username.errors %}
+        <ul class="errors">
+            {% for error in form.username.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <div class="field">
+        {{ form.password.label }}
+        {{ form.password(required=True, minlength=4, autocomplete="new-password") }}
+        {% if form.password.errors %}
+        <ul class="errors">
+            {% for error in form.password.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <div class="field">
+        {{ form.confirm.label }}
+        {{ form.confirm(required=True, minlength=4, autocomplete="new-password") }}
+        {% if form.confirm.errors %}
+        <ul class="errors">
+            {% for error in form.confirm.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    {{ form.submit() }}
+</form>
+{# H4：リンクの文字を「こちら」にせず、行き先がわかる文字にする（01_frontend/03_html_semantic_form 1節） #}
+<p>すでにアカウントをお持ちの方は <a href="{{ url_for('auth.login') }}">ログイン</a></p>
+{% endblock %}

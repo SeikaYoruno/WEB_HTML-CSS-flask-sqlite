@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>問題4：目次付きの長い記事</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        /* TODO 1 */
+
+
+        body { font-family: sans-serif; margin: 0; color: #262b33; line-height: 1.8; }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 56px;
+            padding: 0 16px;
+            background: #3f6fd1;
+            color: #ffffff;
+        }
+
+        .layout { max-width: 880px; margin: 0 auto; padding: 0 16px; display: grid; gap: 32px; }
+
+        @media (min-width: 720px) {
+            .layout { grid-template-columns: 180px 1fr; }
+            .toc { position: sticky; top: 72px; align-self: start; }
+        }
+
+        .toc ol { padding-left: 1.2em; }
+        .toc a { color: #6b7280; text-decoration: none; }
+        .toc a[aria-current="true"] { color: #3f6fd1; font-weight: bold; }
+
+        section {
+            min-height: 80vh;   /* 1つの節が画面の高さくらいになるようにしている */
+            /* TODO 2 */
+        }
+
+        .to-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 999px;
+            background: #262b33;
+            color: #ffffff;
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .to-top[hidden] { display: none; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <strong>はじめてのメモ帳</strong>
+        <span id="progress">読了 0%</span>
+    </header>
+
+    <div class="layout">
+        <nav class="toc" aria-label="目次">
+            <h2>目次</h2>
+            <ol>
+                <li><a href="#intro">はじめに</a></li>
+                <li><a href="#install">インストール</a></li>
+                <li><a href="#usage">使い方</a></li>
+                <li><a href="#faq">よくある質問</a></li>
+            </ol>
+        </nav>
+
+        <main>
+            <h1>はじめてのメモ帳</h1>
+
+            <section id="intro">
+                <h2>1. はじめに</h2>
+                <p>メモ帳は、思いついたことをすぐに書き留められるシンプルなアプリです。このガイドでは、インストールから基本的な使い方までを順番に説明します。</p>
+            </section>
+
+            <section id="install">
+                <h2>2. インストール</h2>
+                <p>インストールは不要です。ブラウザでページを開くだけで使えます。データはブラウザの中に保存されるので、同じブラウザで開けば続きから書けます。</p>
+            </section>
+
+            <section id="usage">
+                <h2>3. 使い方</h2>
+                <p>「新規作成」を押してタイトルと本文を入力し、「保存」を押します。カテゴリのボタンで、メモを絞り込めます。</p>
+            </section>
+
+            <section id="faq">
+                <h2>4. よくある質問</h2>
+                <p>Q. 別のパソコンからメモを見られますか？<br>A. 今のバージョンでは見られません。バックエンド編で、サーバーに保存する版を作ります。</p>
+            </section>
+        </main>
+    </div>
+
+    <button type="button" class="to-top" id="to-top" hidden>↑ トップへ</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

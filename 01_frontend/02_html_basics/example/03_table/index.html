@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>表（table）</title>
+    <style>
+        /* 表の見た目を整える最小限のCSS（CSSは01_frontend/02_cssで学ぶ） */
+        table {
+            border-collapse: collapse;   /* セルの枠線を1本にまとめる */
+        }
+
+        th,
+        td {
+            border: 1px solid #c8ced8;
+            padding: 6px 12px;
+        }
+
+        thead th {
+            background: #eef3ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>表（table）</h1>
+
+    <h2>基本の表</h2>
+    <table>
+        <!-- caption：表のタイトル -->
+        <caption>今週のメモ件数</caption>
+
+        <!-- thead：見出し行のまとまり -->
+        <thead>
+            <tr>
+                <!-- scope="col"：この見出しセルは「列」の見出しであることを示す -->
+                <th scope="col">カテゴリ</th>
+                <th scope="col">件数</th>
+                <th scope="col">最終更新</th>
+            </tr>
+        </thead>
+
+        <!-- tbody：データ行のまとまり -->
+        <tbody>
+            <tr>
+                <!-- scope="row"：この見出しセルは「行」の見出しであることを示す -->
+                <th scope="row">家事</th>
+                <td>3</td>
+                <td>10/01</td>
+            </tr>
+            <tr>
+                <th scope="row">仕事</th>
+                <td>5</td>
+                <td>09/30</td>
+            </tr>
+        </tbody>
+
+        <!-- tfoot：合計などの集計行 -->
+        <tfoot>
+            <tr>
+                <th scope="row">合計</th>
+                <td>8</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <h2>セルの結合（colspan / rowspan）</h2>
+    <table>
+        <caption>時間割</caption>
+        <thead>
+            <tr>
+                <th scope="col">時限</th>
+                <th scope="col">月</th>
+                <th scope="col">火</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <!-- rowspan="2"：下方向に2行分つなげる -->
+                <td rowspan="2">HTML/CSS</td>
+                <td>Python</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <!-- 月曜2限は上のセルが使っているので書かない -->
+                <td>Flask</td>
+            </tr>
+            <tr>
+                <th scope="row">昼</th>
+                <!-- colspan="2"：右方向に2列分つなげる -->
+                <td colspan="2">昼休み</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>※ 表はあくまで「表形式のデータ」を表すためのもの。ページのレイアウト（横並びなど）に使ってはいけません（それはCSSのFlexbox/Gridの仕事）。</p>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>問題4：会員登録フォーム（CSS）</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --color-primary: #3f6fd1;
+            --color-error: #d14343;
+            --color-border: #c8ced8;
+        }
+
+        body {
+            font-family: sans-serif;
+            background: #f4f6f9;
+            color: #262b33;
+            margin: 0;
+            padding: 24px 16px;
+        }
+
+        form {
+            max-width: 420px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        /* TODO 1 */
+
+        /* TODO 2 */
+
+        /* TODO 3 */
+
+        /* TODO 4 */
+
+        fieldset {
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            margin: 0 0 16px;
+        }
+
+        fieldset label {
+            margin-right: 12px;
+        }
+
+        .hint {
+            margin: 4px 0 0;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        /* TODO 5 */
+    </style>
+</head>
+<body>
+    <form action="#" method="post">
+        <h1>ユーザー登録</h1>
+
+        <div class="field">
+            <label for="username">ユーザー名</label>
+            <input id="username" type="text" name="username" required maxlength="50" autocomplete="username">
+        </div>
+
+        <div class="field">
+            <label for="email">メールアドレス</label>
+            <input id="email" type="email" name="email" required autocomplete="email">
+        </div>
+
+        <div class="field">
+            <label for="password">パスワード</label>
+            <input id="password" type="password" name="password" required minlength="4" autocomplete="new-password" aria-describedby="password-hint">
+            <p id="password-hint" class="hint">4文字以上で入力してください</p>
+        </div>
+
+        <div class="field">
+            <label for="confirm">パスワード（確認）</label>
+            <input id="confirm" type="password" name="confirm" required minlength="4" autocomplete="new-password">
+        </div>
+
+        <fieldset>
+            <legend>主な用途</legend>
+            <label><input type="radio" name="purpose" value="work" checked> 仕事</label>
+            <label><input type="radio" name="purpose" value="study"> 勉強</label>
+            <label><input type="radio" name="purpose" value="private"> プライベート</label>
+        </fieldset>
+
+        <div class="field">
+            <label><input type="checkbox" name="newsletter" value="yes"> お知らせメールを受け取る</label>
+        </div>
+
+        <button type="submit">登録</button>
+    </form>
+</body>
+</html>

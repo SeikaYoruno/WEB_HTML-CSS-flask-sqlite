@@ -1,0 +1,10 @@
+# バックエンド編（02_backend/01〜17・100_memo_api）で使うライブラリ
+# 使い方：仮想環境を有効にしてから、リポジトリのルートで
+#   pip install -r 00_docs/setup/requirements.txt
+# バージョンは、このカリキュラムで動作確認したもの
+Flask==2.3.3
+Flask-WTF==1.2.2
+Flask-SQLAlchemy==3.0.3
+Flask-Migrate==4.0.4
+Flask-Login==0.6.3
+SQLAlchemy==2.0.48

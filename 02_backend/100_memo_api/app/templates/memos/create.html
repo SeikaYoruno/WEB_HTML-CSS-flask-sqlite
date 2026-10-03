@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}メモを追加 - メモ帳{% endblock %}
+{% block description %}新しいメモを追加するページです。{% endblock %}
+
+{% block content %}
+<h1>メモを追加</h1>
+{% with draft_key = 'memo-draft' %}{% include "memos/_form.html" %}{% endwith %}
+{% endblock %}

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="登録されているメモの一覧です。カテゴリとキーワードで絞り込めます。">
+    <title>メモ帳</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 保存した配色を、CSSが当たる前に反映する（01_frontend/09_js_data 4節の「応用」） -->
+    <script>
+        try {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.dataset.theme = savedTheme;
+            }
+        } catch (error) {
+            // localStorage が使えない環境では、OS の設定（prefers-color-scheme）に従う
+        }
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="メインメニュー">
+            <a class="site-name" href="index.html">メモ帳</a>
+            <div class="nav-tools">
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="配色を切り替える">◐</button>
+                <button type="button" class="hamburger" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" aria-current="page">メモ一覧</a></li>
+                <li><a href="new.html">メモを追加</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>メモ一覧</h1>
+
+        <div class="list-tools">
+            <div class="filters" id="filters" role="group" aria-label="カテゴリで絞り込む">
+                <button type="button" data-category="all" aria-pressed="true">すべて</button>
+                <button type="button" data-category="家事" aria-pressed="false">家事</button>
+                <button type="button" data-category="仕事" aria-pressed="false">仕事</button>
+                <button type="button" data-category="趣味" aria-pressed="false">趣味</button>
+                <button type="button" data-category="アイデア" aria-pressed="false">アイデア</button>
+                <button type="button" data-category="プライベート" aria-pressed="false">プライベート</button>
+            </div>
+            <input type="search" id="keyword" class="search" placeholder="タイトル・本文で検索" aria-label="タイトル・本文で検索">
+            <p class="list-count" id="list-count" role="status">読み込み中…</p>
+        </div>
+
+        <!-- カードは list.js の render() が、データから作る -->
+        <div class="card-grid" id="memo-list"></div>
+        <p class="empty" id="empty" hidden></p>
+
+        <p class="reset-area">
+            <button type="button" class="button-secondary" id="reset">データを初期状態に戻す</button>
+        </p>
+    </main>
+
+    <footer class="site-footer">
+        <small>&copy; メモ帳</small>
+    </footer>
+
+    <!-- 自動で消える通知（01_frontend/08_js_ui 2節）。common.js の showToast() で使う -->
+    <div id="toast" class="toast" popover="manual" role="status"></div>
+
+    <!-- 確認ダイアログ（01_frontend/08_js_ui 3節）。common.js の openConfirm() で使う -->
+    <dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-message">
+        <div class="dialog-body">
+            <p id="confirm-message"></p>
+            <div class="dialog-actions">
+                <button type="button" class="button-secondary" id="confirm-cancel">キャンセル</button>
+                <button type="button" class="button-danger" id="confirm-ok">OK</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- トップへ戻るボタン（01_frontend/08_js_ui 5節） -->
+    <button type="button" class="to-top" id="to-top" aria-label="ページの先頭へ戻る" hidden>↑</button>
+
+    <!-- 役割ごとに分けたJavaScriptを、上から順に読み込む（storage.js・common.js の関数を後のファイルで使うため、順番が大事） -->
+    <script src="js/storage.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/list.js"></script>
+</body>
+</html>

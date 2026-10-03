@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2. fetch()でJSONを読み込む</title>
+    <style>
+        body { font-family: sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; color: #262b33; }
+        .buttons button { margin-right: 8px; padding: 6px 14px; }
+        .status { color: #6b7280; }
+        .status.error { color: #d14343; font-weight: bold; }
+        .memo { border: 1px solid #e1e5eb; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; }
+        .memo h2 { font-size: 1rem; margin: 0 0 4px; }
+        .memo p { margin: 0; color: #6b7280; font-size: 0.9rem; }
+        .tag { font-size: 0.75rem; color: #3f6fd1; }
+    </style>
+</head>
+<body>
+    <h1>fetch()でJSONを読み込む</h1>
+    <p>
+        このページは <code>python -m http.server</code> で起動したサーバー経由で開いてください
+        （ファイルを直接開くと、ブラウザの制限で <code>fetch()</code> が失敗します）。
+    </p>
+
+    <div class="buttons">
+        <button type="button" id="load">data/memos.json を読み込む</button>
+        <button type="button" id="load-missing">存在しないファイルを読み込む</button>
+    </div>
+
+    <p class="status" id="status"></p>
+    <div id="memo-list"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

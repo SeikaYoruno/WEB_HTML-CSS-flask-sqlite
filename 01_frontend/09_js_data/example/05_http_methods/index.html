@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6. HTTPメソッドを体験する</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body { font-family: sans-serif; max-width: 760px; margin: 40px auto; padding: 0 16px; color: #262b33; line-height: 1.6; }
+        section { border: 1px solid #e1e5eb; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; }
+        h2 { font-size: 1.1rem; margin-top: 0; }
+        .note { background: #fff7e6; border-left: 4px solid #d1723f; padding: 8px 12px; font-size: 0.9rem; }
+
+        .presets { display: flex; flex-wrap: wrap; gap: 8px; }
+        .presets button { padding: 4px 12px; border: 1px solid #c8ced8; border-radius: 999px; background: #fff; font: inherit; font-size: 0.85rem; cursor: pointer; }
+        .presets button:hover { background: #f4f6f9; }
+
+        .request-line { display: flex; gap: 8px; margin: 12px 0; }
+        .request-line select, .request-line input { padding: 6px 8px; font: inherit; }
+        .request-line input { flex: 1; min-width: 0; font-family: monospace; }
+        textarea { width: 100%; height: 120px; padding: 8px; font-family: monospace; font-size: 0.85rem; }
+        textarea:disabled { background: #f4f6f9; color: #9aa5b8; }
+        .send { padding: 8px 24px; border: none; border-radius: 6px; background: #3f6fd1; color: #fff; font: inherit; cursor: pointer; }
+        .send:disabled { opacity: 0.5; cursor: wait; }
+
+        /* メソッドごとの色（ラベル・履歴で使う） */
+        .method { display: inline-block; min-width: 64px; padding: 0 6px; border-radius: 4px; color: #fff; font-family: monospace; font-weight: bold; text-align: center; }
+        .method.GET    { background: #2f9e44; }
+        .method.POST   { background: #3f6fd1; }
+        .method.PUT    { background: #d1723f; }
+        .method.PATCH  { background: #b8860b; }
+        .method.DELETE { background: #d14343; }
+
+        .status { font-family: monospace; font-weight: bold; }
+        .status.ok { color: #2f9e44; }
+        .status.error { color: #d14343; }
+        pre { margin: 8px 0 0; padding: 12px; max-height: 320px; overflow: auto; border-radius: 6px; background: #1f2329; color: #e6e8ec; font-size: 0.85rem; }
+
+        .history { margin: 0; padding: 0; list-style: none; font-size: 0.9rem; }
+        .history li { display: flex; gap: 8px; align-items: center; padding: 4px 0; border-bottom: 1px solid #e1e5eb; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>HTTPメソッドを体験する</h1>
+    <p>
+        練習用のAPI <a href="https://jsonplaceholder.typicode.com/">JSONPlaceholder</a> に、
+        いろいろなメソッドのリクエストを送ってみます。上のボタンで例を選び、「送信」を押してください。
+        開発者ツールの<strong>Network</strong>タブを開いておくと、実際に送られたリクエストも確認できます。
+    </p>
+    <p class="note">
+        JSONPlaceholder は「本物そっくりの返事をするだけ」の練習用APIです。POST・PUT・PATCH・DELETE を送ると
+        成功したような返事は返ってきますが、<strong>サーバーのデータは実際には変わりません</strong>
+        （同じ投稿を GET し直すと、元のままです）。インターネットへの接続が必要です。
+    </p>
+
+    <section>
+        <h2>1. 例を選ぶ</h2>
+        <div class="presets" id="presets">
+            <button type="button" data-method="GET" data-path="/posts?_limit=3">GET 一覧（3件）</button>
+            <button type="button" data-method="GET" data-path="/posts/1">GET 1件</button>
+            <button type="button" data-method="GET" data-path="/posts/9999">GET 存在しない（404）</button>
+            <button type="button" data-method="POST" data-path="/posts">POST 追加</button>
+            <button type="button" data-method="PUT" data-path="/posts/1">PUT 丸ごと置き換え</button>
+            <button type="button" data-method="PATCH" data-path="/posts/1">PATCH 一部だけ変更</button>
+            <button type="button" data-method="DELETE" data-path="/posts/1">DELETE 削除</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. リクエスト</h2>
+        <form id="request-form">
+            <div class="request-line">
+                <label for="method" hidden>メソッド</label>
+                <select id="method">
+                    <option>GET</option>
+                    <option>POST</option>
+                    <option>PUT</option>
+                    <option>PATCH</option>
+                    <option>DELETE</option>
+                </select>
+                <label for="path" hidden>パス</label>
+                <input type="text" id="path" value="/posts/1" aria-describedby="base-url">
+            </div>
+            <p id="base-url"><small>送り先：<code>https://jsonplaceholder.typicode.com</code> ＋ 上のパス</small></p>
+
+            <label for="body">ボディ（送るJSON。GET・DELETE では使わない）</label>
+            <textarea id="body" spellcheck="false"></textarea>
+
+            <p><button type="submit" class="send" id="send">送信</button></p>
+        </form>
+    </section>
+
+    <section>
+        <h2>3. レスポンス</h2>
+        <p id="response-summary">まだ送信していません</p>
+        <pre id="response-body"></pre>
+    </section>
+
+    <section>
+        <h2>4. 送ったリクエストの履歴</h2>
+        <ul class="history" id="history"></ul>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

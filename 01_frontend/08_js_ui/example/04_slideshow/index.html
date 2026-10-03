@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>4. スライドショー</title>
+    <style>
+        body { font-family: sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; color: #262b33; }
+
+        .slideshow {
+            position: relative;        /* 前後ボタンを absolute で重ねる基準 */
+            border-radius: 12px;
+            overflow: hidden;          /* 角丸からはみ出す部分を隠す */
+        }
+
+        /* スライド：すべて同じ場所に重ね、表示中のもの以外は透明にする */
+        .slides {
+            display: grid;
+        }
+
+        .slide {
+            grid-area: 1 / 1;          /* すべてのスライドを同じマスに重ねる */
+            height: 240px;
+            display: grid;
+            place-items: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.6s;  /* 切り替えをふわっとさせる */
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide:nth-child(1) { background: linear-gradient(135deg, #3f6fd1, #7a5af8); }
+        .slide:nth-child(2) { background: linear-gradient(135deg, #2f9e44, #74b816); }
+        .slide:nth-child(3) { background: linear-gradient(135deg, #d1723f, #f2b84b); }
+
+        /* 前へ・次へボタン */
+        .slide-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgb(255 255 255 / 0.85);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .slide-nav.prev { left: 12px; }
+        .slide-nav.next { right: 12px; }
+
+        /* 何枚目かを示すドット */
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .dots button {
+            width: 12px;
+            height: 12px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: #c8ced8;
+            cursor: pointer;
+        }
+
+        .dots button[aria-current="true"] {
+            background: #3f6fd1;
+        }
+
+        .status { text-align: center; color: #6b7280; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <h1>スライドショー</h1>
+    <p>3秒ごとに自動で切り替わります。マウスを乗せている間・ボタンにフォーカスがある間は止まります。</p>
+
+    <div class="slideshow" id="slideshow" aria-roledescription="スライドショー">
+        <div class="slides">
+            <div class="slide active">1. メモ帳アプリ</div>
+            <div class="slide">2. ポートフォリオサイト</div>
+            <div class="slide">3. タイピングゲーム</div>
+        </div>
+        <button type="button" class="slide-nav prev" aria-label="前のスライド">‹</button>
+        <button type="button" class="slide-nav next" aria-label="次のスライド">›</button>
+    </div>
+
+    <!-- ドットのボタンは JavaScript でスライドの数だけ作る -->
+    <div class="dots" id="dots"></div>
+    <p class="status" id="status"></p>
+
+    <script src="script.js"></script>
+</body>
+</html>

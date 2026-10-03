@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>3. モーダルウィンドウ</title>
+    <style>
+        body { font-family: sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; color: #262b33; }
+
+        .works { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 0; list-style: none; }
+        .works button { width: 100%; padding: 16px; border: 1px solid #e1e5eb; border-radius: 8px; background: #fff; font: inherit; text-align: left; cursor: pointer; }
+        .works button:hover { border-color: #3f6fd1; }
+
+        /* <dialog> 要素の見た目 */
+        dialog {
+            width: min(90vw, 420px);
+            border: none;
+            border-radius: 12px;
+            padding: 0;   /* 余白は中の .dialog-body に付ける（理由は script.js の「背景のクリック」を参照） */
+            box-shadow: 0 12px 32px rgb(0 0 0 / 0.25);
+        }
+
+        /* モーダルの後ろの暗い背景（::backdrop 疑似要素） */
+        dialog::backdrop {
+            background: rgb(0 0 0 / 0.5);
+        }
+
+        .dialog-body { padding: 24px; }
+        dialog h2 { margin-top: 0; }
+
+        /* モーダルが開いている間は、後ろのページをスクロールさせない
+           :has() は「〜を含む要素」を選ぶ疑似クラス。<dialog open> を含む body のときだけ効く */
+        body:has(dialog[open]) {
+            overflow: hidden;
+        }
+
+        .long { margin-top: 32px; color: #6b7280; }
+        .long p { height: 160px; border-left: 4px solid #e1e5eb; padding-left: 12px; }
+        .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+        .dialog-actions button { padding: 8px 16px; font: inherit; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>モーダルウィンドウ</h1>
+    <p>作品をクリックすると、詳しい説明がモーダルウィンドウで表示されます。閉じるボタン・Esc キー・暗い背景のクリックで閉じます。</p>
+
+    <ul class="works" id="works">
+        <li><button type="button" data-title="メモ帳アプリ" data-detail="ブラウザだけで動くメモ帳。localStorage に保存する。">メモ帳アプリ</button></li>
+        <li><button type="button" data-title="ポートフォリオサイト" data-detail="このサイト。スマホ表示に対応している。">ポートフォリオサイト</button></li>
+        <li><button type="button" data-title="タイピングゲーム" data-detail="キーボードのイベントを使ったミニゲーム。">タイピングゲーム</button></li>
+    </ul>
+
+    <!-- 後ろのページがスクロールしないことを確かめるための、縦に長い部分 -->
+    <div class="long">
+        <p>（スクロールの確認用）下にスクロールしてから作品を開き、マウスホイールを回してみてください。</p>
+        <p>モーダルが開いている間は、後ろのページはスクロールしません。</p>
+        <p>閉じると、またスクロールできるようになります。</p>
+        <p>ページの終わり</p>
+    </div>
+
+    <!--
+        <dialog>：ポップアップ（ダイアログ）用のHTML要素。最初は表示されない
+        showModal() で開くと「モーダル」になり、後ろの画面は操作できなくなる
+    -->
+    <dialog id="work-dialog" aria-labelledby="dialog-title">
+        <div class="dialog-body">
+            <h2 id="dialog-title"></h2>
+            <p id="dialog-detail"></p>
+            <div class="dialog-actions">
+                <button type="button" id="dialog-close">閉じる</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>5. スクロール動作</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; color: #262b33; }
+
+        /* ページ内リンク（#id）で移動するとき、なめらかにスクロールする（CSSだけでできる） */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 「動きを減らす」設定の人には、なめらかなスクロールをやめる */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+        }
+
+        /* ===== ヘッダー：上に固定。スクロールしたら影を付ける ===== */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .site-header.scrolled {
+            box-shadow: 0 2px 12px rgb(0 0 0 / 0.12);
+        }
+
+        .site-header nav {
+            display: flex;
+            gap: 16px;
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 12px 16px;
+        }
+
+        .site-header a { color: #3f6fd1; }
+
+        /* ページをどこまで読んだかを示すバー */
+        .progress {
+            height: 4px;
+            width: 0;
+            background: #3f6fd1;
+        }
+
+        main { max-width: 640px; margin: 0 auto; padding: 0 16px 80px; }
+
+        /* sticky のヘッダーに見出しが隠れないよう、ジャンプ先の上に余白をとる */
+        section { scroll-margin-top: 70px; }
+
+        section h2 { padding-top: 24px; }
+
+        /* ===== 画面に入ったらふわっと表示する ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .card { height: 140px; margin: 16px 0; border-radius: 8px; background: #e8edfb; display: grid; place-items: center; }
+
+        /* ===== トップへ戻るボタン：最初は隠しておく ===== */
+        .to-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: #3f6fd1;
+            color: #ffffff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgb(0 0 0 / 0.2);
+        }
+
+        .to-top[hidden] { display: none; }
+    </style>
+</head>
+<body>
+    <header class="site-header" id="site-header">
+        <nav>
+            <a href="#about">自己紹介</a>
+            <a href="#works">作品</a>
+            <a href="#contact">連絡先</a>
+        </nav>
+        <div class="progress" id="progress"></div>
+    </header>
+
+    <main>
+        <h1>スクロール動作</h1>
+        <p>上のリンクを押すと、その場所までなめらかにスクロールします。スクロールすると、ヘッダーに影が付き、青いバーが伸び、右下に「トップへ戻る」ボタンが出ます。</p>
+
+        <section id="about">
+            <h2>自己紹介</h2>
+            <p class="fade-in">ここは「自己紹介」の段落です。画面に入るとふわっと表示されます。</p>
+            <div class="card fade-in">カード1</div>
+            <div class="card fade-in">カード2</div>
+        </section>
+
+        <section id="works">
+            <h2>作品</h2>
+            <div class="card fade-in">作品A</div>
+            <div class="card fade-in">作品B</div>
+            <div class="card fade-in">作品C</div>
+            <!-- JavaScript でスクロールする例 -->
+            <button type="button" id="jump-contact">連絡先へ移動（JavaScript）</button>
+        </section>
+
+        <section id="contact">
+            <h2>連絡先</h2>
+            <div class="card fade-in">お問い合わせフォームはこちら</div>
+            <div class="card fade-in">SNS</div>
+        </section>
+    </main>
+
+    <button type="button" class="to-top" id="to-top" aria-label="ページの先頭へ戻る" hidden>↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

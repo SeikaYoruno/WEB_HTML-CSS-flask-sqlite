@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>解答5：投稿ボード</title>
+    <style>
+        body { font-family: sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; color: #262b33; }
+        form { display: grid; gap: 8px; margin-bottom: 16px; }
+        input, textarea { padding: 8px; font: inherit; }
+        button { font: inherit; cursor: pointer; }
+        .log { margin: 0 0 12px; padding: 8px 12px; border-radius: 6px; background: #f4f6f9; font-family: monospace; font-size: 0.9rem; }
+        .log.error { background: #fdecec; color: #d14343; }
+        ul { padding: 0; list-style: none; }
+        li { display: flex; gap: 8px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #e1e5eb; }
+        li .text { flex: 1; }
+        li h2 { margin: 0; font-size: 1rem; }
+        li p { margin: 4px 0 0; color: #6b7280; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <h1>投稿ボード</h1>
+
+    <form id="add-form">
+        <input type="text" id="new-title" placeholder="タイトル" aria-label="タイトル">
+        <textarea id="new-body" rows="2" placeholder="本文" aria-label="本文"></textarea>
+        <button type="submit">投稿する</button>
+    </form>
+
+    <p class="log" id="log" role="status">読み込み中…</p>
+    <p><button type="button" id="load-missing">存在しない投稿（id: 9999）を読み込む</button></p>
+
+    <ul id="post-list"></ul>
+
+    <script src="script.js"></script>
+</body>
+</html>
