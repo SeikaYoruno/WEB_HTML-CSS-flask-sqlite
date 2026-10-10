@@ -14,114 +14,66 @@
 
         /* (1) */
         TODO {
-            color: #3f6fd1;
+            line-height: 1.8;
         }
 
         /* (2) */
+        TODO {
+            color: #3f6fd1;
+        }
+
+        /* (3) */
+        TODO {
+            border: 1px solid #e1e5eb;
+            border-radius: 8px;
+            padding: 4px 16px;
+            margin-bottom: 12px;
+        }
+
+        /* (4) */
         TODO {
             color: #6b7280;
             font-size: 0.85rem;
         }
 
-        /* (3) */
-        TODO {
-            font-weight: bold;
-        }
-
-        /* (4) */
-        TODO {
-            background: #3f6fd1;
-            color: #ffffff;
-        }
-
         /* (5) */
         TODO {
-            color: #d1723f;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: #e8edfb;
+            text-decoration: none;
         }
 
         /* (6) */
         TODO {
-            content: "（PDF）";
+            background: #3f6fd1;
+            color: #ffffff;
         }
-
-        /* (7) */
-        TODO {
-            background: #f4f6f9;
-        }
-
-        /* (8) */
-        TODO {
-            border-left: 4px solid #3f6fd1;
-            padding-left: 8px;
-        }
-
-        /* (9) */
-        TODO {
-            text-decoration: line-through;
-            color: #6b7280;
-        }
-
-        /* (10) */
-        TODO {
-            border: 2px solid #d1723f;
-        }
-
-        /* (11) */
-        TODO {
-            background: #e8edfb;
-        }
-
-        /* 以下は問題ではない（見た目を整えるだけ） */
-        .tag { display: inline-block; padding: 2px 10px; border-radius: 999px; background: #e1e5eb; font-size: 0.8rem; }
-        .todo { list-style: none; padding: 0; }
-        .todo li { padding: 6px 12px; }
-        .memo { border: 1px solid #e1e5eb; border-radius: 8px; padding: 12px 16px; }
     </style>
 </head>
 <body>
-    <h1>メモの詳細</h1>
+    <h1>メモ一覧</h1>
+    <p>今週のメモをまとめています。</p>
 
+    <h2>仕事</h2>
     <div class="memo">
-        <p>作成日：2026年10月1日</p>
-        <p>更新日：2026年10月3日</p>
-        <div class="memo-body">
-            <p>本文の段落です。.memo の直下ではなく、.memo-body の中にあります。</p>
-        </div>
-        <span class="tag active">仕事</span>
-        <span class="tag">家事</span>
-        <span class="tag">趣味</span>
+        <h3>資料を作る</h3>
+        <p>金曜日までに下書きを作り、先輩に見てもらう。</p>
+        <p class="date">2026年10月1日</p>
+    </div>
+    <div class="memo">
+        <h3>会議の準備</h3>
+        <p>議題を3つにまとめておく。</p>
+        <p class="date">2026年10月2日</p>
     </div>
 
     <h2>リンク</h2>
-    <p>このメモで参考にしたページです。</p>
-    <p>
-        <a href="https://developer.mozilla.org/ja/">MDN Web Docs</a> ／
-        <a href="memo-list.html">メモ一覧へ</a> ／
-        <a href="terms.pdf">利用規約</a>
-    </p>
-
-    <h2>やること</h2>
-    <p>終わったものにはチェックを付けます。</p>
-    <ul class="todo">
-        <li class="done">資料を集める</li>
-        <li>下書きを書く</li>
-        <li>見直す</li>
-        <li class="done">先輩に相談する</li>
-        <li>提出する</li>
-    </ul>
-
-    <h2>チェックリスト</h2>
-    <p>チェックを付けると、ラベルに取り消し線が付きます。</p>
-    <p>
-        <input type="checkbox" id="c1" checked><label for="c1">牛乳を買う</label><br>
-        <input type="checkbox" id="c2"><label for="c2">卵を買う</label>
-    </p>
-
-    <h2>メモを追加</h2>
-    <p>タイトルは必須です。</p>
-    <p>
-        <label>タイトル <input type="text" required></label>
-        <label>メモ <input type="text"></label>
-    </p>
+    <nav class="links">
+        <a href="#">メモ一覧</a>
+        <a href="#">メモを追加</a>
+        <a href="#">設定</a>
+    </nav>
+    <p>CSSの書き方は、<a href="https://developer.mozilla.org/ja/">MDN Web Docs</a>で調べられます。</p>
 </body>
 </html>

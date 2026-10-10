@@ -12,5 +12,8 @@ migrations/
 .env
 .DS_Store
 
+# 仮想環境
+flaskenv/
+
 # 補足資料（公開しない）
 bk/
