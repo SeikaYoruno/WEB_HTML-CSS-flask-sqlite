@@ -3,29 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="思いついたことをすぐに書き留められるメモ帳アプリです。">
     <title>{% block title %}メモ帳{% endblock %}</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/static/style.css">
+    {# 保存した配色を、CSSが当たる前に反映する（01_frontend/09_js_data 4節の「応用」） #}
+    <script>
+        try {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.dataset.theme = savedTheme;
+            }
+        } catch (error) {
+            // localStorage が使えない環境では、OS の設定（prefers-color-scheme）に従う
+        }
+    </script>
 </head>
 <body>
-    <header>
-        <nav>
-            <strong>メモ帳</strong>
-            <a href="/">メモ一覧</a>
-            {% if current_user.is_authenticated %}
-            <a href="/memos/new">メモを追加</a>
-            <span>{{ current_user.username }} さん</span>
-            <a href="/logout">ログアウト</a>
-            {% else %}
-            <a href="/login">ログイン</a>
-            <a href="/register">新規登録</a>
-            {% endif %}
+    {# ヘッダー・フッター・通知などの共通部分（02_backend/02_memo_app_frontend の各HTMLと同じ構造） #}
+    {# request.path は今開いているURLのパス。今いるページのリンクに aria-current="page" を付ける（02_backend/06_jinja2 3-6） #}
+    <header class="site-header">
+        <nav class="site-nav" aria-label="メインメニュー">
+            <a class="site-name" href="/">メモ帳</a>
+            <div class="nav-tools">
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="配色を切り替える">◐</button>
+                <button type="button" class="hamburger" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/"{% if request.path == '/' %} aria-current="page"{% endif %}>メモ一覧</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a href="/memos/new"{% if request.path == '/memos/new' %} aria-current="page"{% endif %}>メモを追加</a></li>
+                <li class="nav-user">{{ current_user.username }} さん</li>
+                <li><a href="/logout">ログアウト</a></li>
+                {% else %}
+                <li><a href="/login"{% if request.path == '/login' %} aria-current="page"{% endif %}>ログイン</a></li>
+                <li><a href="/register"{% if request.path == '/register' %} aria-current="page"{% endif %}>新規登録</a></li>
+                {% endif %}
+            </ul>
         </nav>
     </header>
 
     <main>
+        {# flash() のメッセージ（02_backend/15_login）。script.js が右下の通知で表示し、この一覧は隠す #}
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <ul class="flash">
+        <ul class="flash" id="flash" role="status">
             {% for message in messages %}
             <li>{{ message }}</li>
             {% endfor %}
@@ -36,8 +60,29 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        &copy; メモ帳
+    <footer class="site-footer">
+        <small>&copy; メモ帳</small>
+        {# TODO: 問題4 app.py の before_request でセットした g.access_time を、ここに表示する #}
     </footer>
+
+    {# 自動で消える通知（01_frontend/08_js_ui 2節）。script.js の showToast() で使う #}
+    <div id="toast" class="toast" popover="manual" role="status"></div>
+
+    {# 確認ダイアログ（01_frontend/08_js_ui 3節）。script.js が data-confirm を持つフォームで使う #}
+    <dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-message">
+        <div class="dialog-body">
+            <p id="confirm-message"></p>
+            <div class="dialog-actions">
+                <button type="button" class="button-secondary" id="confirm-cancel">キャンセル</button>
+                <button type="button" class="button-danger" id="confirm-ok">削除する</button>
+            </div>
+        </div>
+    </dialog>
+
+    {# トップへ戻るボタン（01_frontend/08_js_ui 5節） #}
+    <button type="button" class="to-top" id="to-top" aria-label="ページの先頭へ戻る" hidden>↑</button>
+
+    {# 全ページ共通の JavaScript（完成済み。02_backend/100_memo_api の static/script.js と同じ） #}
+    <script src="/static/script.js"></script>
 </body>
 </html>

@@ -61,19 +61,19 @@ def memo_detail(memo_id):
         title = memo.title
         category = memo.category
         body = memo.body
-        due_date_line = f"期限: {memo.due_date}" if memo.due_date else ''
+        due_date = memo.due_date
     else:
         title = f'メモID {memo_id} は見つかりません'
         category = ''
         body = ''
-        due_date_line = ''
+        due_date = None
 
     return render_template(
         'detail.html',
         title=title,
         category=category,
         body=body,
-        due_date_line=due_date_line,
+        due_date=due_date,
     )
 
 

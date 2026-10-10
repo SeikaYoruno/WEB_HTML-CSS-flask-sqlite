@@ -287,7 +287,7 @@ python app.py
 
 `02_backend/05_redirect`で作ったメモ一覧・詳細ページ・リダイレクト（`challenge/challenge.py`にすでに実装済み）は、そのままです。この章の主役は**テンプレート側**なので、Python側の変更はありません。
 
-`challenge/templates/`の3ファイル（`base.html`・`top.html`・`detail.html`）は、それぞれTODOコメントだけが書かれた状態です。TODOコメントの指示に従って、`02_backend/05_redirect/challenge/answer/templates/`にあった「ハードコードされた5枚のカード」「header/nav/footerの重複」を、テンプレート継承と`{% for %}`ループを使った書き方に置き換えてください。
+`challenge/templates/`の3ファイル（`base.html`・`top.html`・`detail.html`）は、TODOコメントが書かれた状態です（`base.html`だけは、共通部分のHTMLが用意済み）。TODOコメントの指示に従って、`02_backend/05_redirect/challenge/answer/templates/`にあった「ハードコードされた5枚のカード」「header/nav/footerの重複」を、テンプレート継承と`{% for %}`ループを使った書き方に置き換えてください。
 
 ```bash
 python 02_backend/06_jinja2/challenge/challenge.py
@@ -305,7 +305,9 @@ python 02_backend/06_jinja2/challenge/challenge.py
 
 - `{% extends "base.html" %}`は必ずファイルの先頭に書く（セクション2）
 - `memo_list()`から渡される`memos`は`[{"id": 1, "title": ..., "category": ..., "body": ...}, ...]`という辞書のリスト。`{% for memo in memos %}`でループし、`memo.id`・`memo.title`のように参照する（セクション1）
-- カードのリンク先は`href="/memos/{{ memo.id }}"`、カテゴリは`<span class="tag">{{ memo.category }}</span>`
+- 1枚のカードは`02_memo_app_frontend`の`list.js`の`createCard()`が作っていたものと同じ形の`<article class="card" data-category="{{ memo.category }}">`。中の`<a class="card-link">`のリンク先は`href="/memos/{{ memo.id }}"`、カテゴリは`<span class="tag">{{ memo.category }}</span>`、タイトルは`<h2 class="card-title">`、本文は`<p class="card-body">`（`top.html`のTODOコメントに形を載せている）
+- `data-category`は、`static/script.js`のカテゴリ絞り込みが使う。付け忘れると、絞り込みボタンを押したときにカードが消えてしまう
+- `base.html`の`header`・`footer`・通知（`#toast`）・確認ダイアログ・`<script src="/static/script.js">`は用意済み。TODOの2か所（`title`ブロックと`content`ブロック）だけを書けばよい
 - 完成したら、ブラウザで`http://127.0.0.1:5014/`と`http://127.0.0.1:5014/memos/1`を開き、`02_backend/05_redirect`の頃と見た目が変わっていないことを確認する（中身の書き方だけが変わっている）
 
 ### 動作確認：仕上がったテンプレートが以前と同じに見えるか

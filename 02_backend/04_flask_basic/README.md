@@ -34,9 +34,11 @@ Flask の基本を学ぶサンプル集です。Hello World から始まり、�
 │       └── detail.html          # ex04_render_template.py 用
 └── challenge/                   # 練習問題（02_backend/00_my_appに組み込むルーティングの雛形）
     ├── challenge.py
-    ├── static/                  # メモ帳の見た目（02_memo_app_frontend と同じ配色・レイアウトのCSS）
-    │   └── style.css
-    ├── templates/               # 完成済みテンプレート
+    ├── static/                  # 完成済み。02_backend/100_memo_api の static/ と同じ（02_memo_app_frontend と同じ見た目・動き）
+    │   ├── style.css            # 02_memo_app_frontend の css/style.css と同じデザイン
+    │   ├── script.js            # 配色の切り替え・メニュー・絞り込み・通知など（02_memo_app_frontend の common.js・list.js と同じ動き）
+    │   └── favicon.svg
+    ├── templates/               # 完成済みテンプレート（02_memo_app_frontend の index.html・detail.html と同じ構造）
     │   ├── top.html             # 静的なメモ一覧ページ（Flaskで配信する）
     │   └── detail.html          # 新規：メモ詳細ページ
     └── answer/                  # 練習問題の解答
@@ -498,7 +500,11 @@ python 02_backend/04_flask_basic/example/ex05_error_handling.py
 
 ### 問題：メモ帳の一覧ページをFlaskで配信し、メモ詳細ページを追加しよう
 
-静的なメモ帳のトップページ（メモのカードがHTMLに直接書かれた、`02_memo_app_frontend`と同じ見た目のページ）を土台に、Flaskで配信できるようにし、さらにメモ詳細ページを追加します。`challenge/challenge.py`を開き、TODOコメントの指示に従って以下の仕様を満たすルーティングを実装してください。テンプレート（`challenge/templates/top.html`・`challenge/templates/detail.html`）とCSS（`challenge/static/`）は完成済みなので、Python側のルーティングだけを実装します。ここで作るルーティングは、この先の章で`02_backend/00_my_app`に組み込んでいきます。
+静的なメモ帳のトップページ（メモのカードがHTMLに直接書かれた、`02_memo_app_frontend`と同じ見た目のページ）を土台に、Flaskで配信できるようにし、さらにメモ詳細ページを追加します。`challenge/challenge.py`を開き、TODOコメントの指示に従って以下の仕様を満たすルーティングを実装してください。テンプレート（`challenge/templates/top.html`・`challenge/templates/detail.html`）と`challenge/static/`（CSS・JavaScript・ファビコン）は完成済みなので、Python側のルーティングだけを実装します。
+
+画面のHTML・CSS・JavaScriptは、`02_memo_app_frontend`のものを、そのままFlaskで配信できる形にしたものです（完成形の`02_backend/100_memo_api`とも同じ）。配色の切り替え（◐）・カテゴリとキーワードの絞り込み・トップへ戻るボタンは`static/script.js`がブラウザ側で動かすので、Python側で何かする必要はありません。`02_memo_app_frontend`ではJavaScriptがデータからカードを作っていましたが、バックエンド編では**サーバー（Flask）がHTMLを作って返す**ように少しずつ置き換えていきます。この先の章のchallengeも、すべて同じ画面を土台にしています。
+
+ここで作るルーティングは、この先の章で`02_backend/00_my_app`に組み込んでいきます。
 
 ```bash
 python 02_backend/04_flask_basic/challenge/challenge.py

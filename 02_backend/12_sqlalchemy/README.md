@@ -65,13 +65,13 @@ pip install sqlalchemy flask-sqlalchemy
 データベースのテーブルを **Python クラス** として、レコードを **Python オブジェクト** として扱えるようにする仕組みです。
 
 ```
-通常（10 sqlite3）:  SQL 文字列を直接書く
+通常（11 sqlite3）:  SQL 文字列を直接書く
 ORM（SQLAlchemy）:   Python オブジェクトを操作する → SQLAlchemy が SQL を生成
 ```
 
-### 10 sqlite3 との比較
+### 11 sqlite3 との比較
 
-| | 10 sqlite3 | 11 SQLAlchemy |
+| | 11 sqlite3 | 12 SQLAlchemy |
 |---|---|---|
 | SQL の書き方 | 文字列として直接書く | Python のメソッドとして書く |
 | テーブル定義 | `cur.execute("CREATE TABLE ...")` | `class Item(Base):` で定義 |

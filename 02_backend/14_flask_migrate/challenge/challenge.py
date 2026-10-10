@@ -87,20 +87,20 @@ def memo_detail(memo_id):
         title = memo.title
         category = memo.category
         body = memo.body
-        # TODO: 問題3 memo.due_date を使って due_date_line を作る（未設定なら空文字）
-        due_date_line = ''
+        # TODO: 問題3 memo.due_date を due_date に入れる（期限が未設定のメモでは None のまま）
+        due_date = None
     else:
         title = f'メモID {memo_id} は見つかりません'
         category = ''
         body = ''
-        due_date_line = ''
+        due_date = None
 
     return render_template(
         'detail.html',
         title=title,
         category=category,
         body=body,
-        due_date_line=due_date_line,
+        due_date=due_date,
     )
 
 

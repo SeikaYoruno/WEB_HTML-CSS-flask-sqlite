@@ -45,7 +45,7 @@ Flaskの`request`オブジェクトを使って、クエリパラメータの絞
     ├── templates/            # base.htmlを継承する構成（02_backend/06_jinja2の練習問題より）
     └── answer/
         ├── challenge.py
-        ├── books.json
+        ├── memos.json
         ├── static/
         └── templates/
 ```

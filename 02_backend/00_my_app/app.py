@@ -11,7 +11,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-# ここに 001_flask_basic のルーティングから追加していく
+# ここに 04_flask_basic のルーティングから追加していく
 
 
 if __name__ == '__main__':

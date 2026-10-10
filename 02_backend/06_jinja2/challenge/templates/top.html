@@ -1,13 +1,20 @@
 {# TODO: base.html を継承する（extends） #}
 
 {#
-    TODO: block "content" の中に、02_backend/05_redirectのanswerと同じ見た目のカード一覧を
-    {% for %} を使ってメモ一覧をループ表示してください。
+    TODO: block "content" の中に、02_backend/05_redirect の answer と同じ見た目のメモ一覧を作ってください。
 
-    - challenge.py の memo_list() から memos（辞書のリスト。各要素は
-      id / title / category / body を持つ）が渡されています
-    - 各カードは <a class="card" href="/memos/{{ memo.id }}"> で囲む
-    - カテゴリは <span class="tag">{{ memo.category }}</span>
-    - 02_backend/05_redirect/challenge/answer/templates/top.html にハードコードされていた
-      5枚のカードを、このループ1つに置き換えるのが目標です
+    - 見出し <h1>メモ一覧</h1> と、絞り込みの <div class="list-tools">…</div> は
+      02_backend/05_redirect/challenge/answer/templates/top.html からそのままコピーしてよい
+    - <div class="card-grid" id="card-grid"> の中は、{% for %} でメモ一覧をループ表示する
+      （05_redirect でハードコードされていた5枚の <article class="card"> を、このループ1つに置き換えるのが目標）
+    - challenge.py の memo_list() から memos（辞書のリスト。各要素は id / title / category / body を持つ）が渡されている
+    - 1枚のカードの形：
+        <article class="card" data-category="カテゴリ">
+            <a class="card-link" href="/memos/ID">
+                <span class="tag">カテゴリ</span>
+                <h2 class="card-title">タイトル</h2>
+                <p class="card-body">本文</p>
+            </a>
+        </article>
+    - 最後に <p class="empty" id="empty" hidden>該当するメモはありません</p> を置く
 #}

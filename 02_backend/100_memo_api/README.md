@@ -13,6 +13,7 @@
 - [どの章の内容か](#どの章の内容か)
 - [フロントエンド編から取り入れた項目](#フロントエンド編から取り入れた項目)
 - [動作確認](#動作確認)
+- [発展課題：編集・削除・ピン留めを自分で作る](#発展課題編集削除ピン留めを自分で作る)
 
 ---
 
@@ -189,3 +190,98 @@ docker compose up --build
 | ◐を押してからリロードする | 選んだ配色のまま開く |
 | デバイスツールバーで幅375pxにする | ハンバーガーメニュー（☰）になり、カードが1列になる |
 | ページをクリックしてから`Tab`キーで移動する | フォーカスしているリンク・ボタンに橙色の枠が出る |
+
+---
+
+## 発展課題：編集・削除・ピン留めを自分で作る
+
+04〜17章の練習問題で作ったのは、メモの「一覧・詳細・追加」と「ログイン」までです。このアプリにある**編集・削除・ピン留め**は、各章の練習問題では作っていません。どれも01〜17章で学んだ書き方の組み合わせで作れるので、17章を終えたら、自分の手で追加してみましょう。
+
+### 出発点
+
+[17_blueprint/challenge/answer](../17_blueprint/challenge/answer/)をフォルダごとコピーして使います（[00_my_app](../00_my_app/)で育ててきた自分のアプリに追加してもかまいません）。17章の解答では、メモのルートは`application/memos/views.py`（Blueprint名`memos`）、テンプレートは`templates/`にあります。
+
+```bash
+cd コピーしたフォルダ
+flask --app app db init
+flask --app app db migrate -m "create memos and users tables"
+flask --app app db upgrade
+python app.py   # http://127.0.0.1:5052/ で、17章と同じ画面が開くことを確認する
+```
+
+3つの機能は、どれもログインした人だけが使えるようにします（`@login_required`、テンプレートでは`{% if current_user.is_authenticated %}`でボタンを出し分ける）。
+
+### 課題1：編集
+
+登録済みのメモのタイトル・カテゴリ・本文・期限を書き換えられるようにします。
+
+| エンドポイント | メソッド | 処理 |
+|---|---|---|
+| `/memos/<int:memo_id>/edit` | GET | 今の内容を入れたフォーム（`edit_memo.html`）を表示する |
+| `/memos/<int:memo_id>/edit` | POST（チェック成功） | メモを書き換えて保存し、flash「メモを更新しました。」とともに詳細ページへリダイレクトする |
+| `/memos/<int:memo_id>/edit` | POST（チェック失敗） | エラーメッセージ付きでフォームを再表示する |
+| 存在しないIDのとき | — | `abort(404)`で404にする |
+
+**ヒント**
+
+- フォームは追加と同じ`MemoForm`を使う。`edit_memo.html`は`new_memo.html`をコピーして、見出しとタイトルを「メモを編集」に変えればよい（共通部分を`include`でまとめると、このアプリの`memos/_form.html`と同じ形になる：[06_jinja2](../06_jinja2/) 3-4）
+- 初めて開いたとき（`request.method == 'GET'`）だけ、`form.title.data = memo.title`のように今の内容をフォームに入れる。POSTのときにも入れてしまうと、入力した内容が元に戻ってしまう（[08_request](../08_request/)）
+- 取り出した`memo`の属性を書き換えて`db.session.commit()`すれば更新される。`db.session.add()`は要らない（[13_flask_sqlalchemy](../13_flask_sqlalchemy/) 5節）
+- 期限を空欄にしたときは`form.due_date.data or None`で`None`にしておくと、詳細ページの「期限」欄が消える
+- 一覧のカードと詳細ページに「編集」リンク（`url_for('memos.edit_memo', memo_id=memo.id)`）を置く。17章の`memo_detail()`はテンプレートに`title`などしか渡していないので、`memo=memo`も渡すようにする（メモが無いときは`None`になるので、テンプレートでは`{% if memo and current_user.is_authenticated %}`で囲む）
+
+### 課題2：削除
+
+メモをデータベースから消せるようにします。
+
+| エンドポイント | メソッド | 処理 |
+|---|---|---|
+| `/memos/<int:memo_id>/delete` | POST | メモを削除し、flash「メモを削除しました。」とともに一覧へリダイレクトする |
+
+**ヒント**
+
+- 削除は**POSTだけ**で受け付ける。GETのリンクで消せるようにすると、URLを開いただけ（リンクの先読みなど）で消えてしまう
+- POSTで送るフォームにはCSRFトークンが必要（[09_forms](../09_forms/) 4節）。入力欄の無い`ActionForm(FlaskForm)`（`submit`だけを持つ）を`forms.py`に作り、ビューで`ActionForm().validate_on_submit()`が`True`のときだけ削除する。テンプレートには`{{ action_form.csrf_token }}`を出すので、一覧と詳細のビューから`action_form=ActionForm()`を渡す
+- 削除は`db.session.delete(memo)` → `db.session.commit()`（13_flask_sqlalchemy 5節）
+- 削除ボタンのフォームに`data-confirm="「{{ memo.title }}」を削除しますか？"`を付けると、`static/script.js`（完成済み）が送信の前に確認ダイアログを出してくれる。Python側は何もしなくてよい
+
+### 課題3：ピン留め
+
+大事なメモを一覧の先頭に固定できるようにします。データベースに新しいカラムが必要なので、マイグレーションから始めます。
+
+| 内容 | 処理 |
+|---|---|
+| `Memo`モデル | `is_pinned`（真偽値。既定は`False`）カラムを追加し、マイグレーションで既存のテーブルに反映する |
+| `/memos/<int:memo_id>/pin`（POST） | `is_pinned`を反転して保存し、flash「ピン留めしました。」／「ピン留めを外しました。」を出して、**押したページ**（一覧または詳細）に戻る |
+| 一覧の並び順 | ピン留めしたメモを先頭に、それ以外は新しい順（`02_memo_app_frontend`の`sortMemos()`と同じ） |
+| 表示 | 一覧のカード左上に☆／★のボタン、詳細ページに「ピン留めする／外す」ボタン |
+
+```bash
+# is_pinned をモデルに追加したら
+flask --app app db migrate -m "add is_pinned column"
+flask --app app db upgrade
+```
+
+**ヒント**
+
+- カラムは`db.Column(db.Boolean, nullable=False, default=False, server_default='0')`のように書く。`server_default`が無いと、すでに行がある`memos`テーブルへの追加が`Cannot add a NOT NULL column with default value NULL`で失敗する（既存の5件に入れる値が決まらないため。`default`はPythonから追加するときだけの既定値で、データベースには伝わらない）。[14_flask_migrate](../14_flask_migrate/)で`due_date`を追加したときは`nullable=True`だったので、この問題は起きなかった
+- 反転は`memo.is_pinned = not memo.is_pinned`。CSRFの確認は課題2の`ActionForm`をそのまま使う
+- 押したページに戻るには`redirect(request.referrer or url_for('memos.memo_list'))`。`request.referrer`は、このリクエストを送ったページのURL（無いときは`None`）
+- 並び順は`query.order_by(Memo.is_pinned.desc(), Memo.id.desc())`（[12_sqlalchemy](../12_sqlalchemy/) 2節の`order_by`）
+- ☆／★のボタンは、このアプリの`templates/memos/index.html`の`pin-form`と同じ形にすると、`static/style.css`のスタイルがそのまま当たる
+
+### 動作確認
+
+| 確認する操作 | 確認したいこと |
+|---|---|
+| ログインせずに一覧・詳細を開く | ☆・編集・削除のボタンが表示されない |
+| ログインせずに`/memos/1/edit`を開く | ログインページに移動する |
+| ログインして、詳細ページで「編集」を押し、タイトルを変えて保存する | 詳細ページに戻り、タイトルが変わっていて「メモを更新しました。」の通知が出る |
+| 編集で本文を空にして保存する | フォームが再表示され、エラーが出る。メモは変わっていない |
+| `/memos/999/edit`を開く | 404になる |
+| 一覧で「削除」を押してキャンセルする／OKを押す | キャンセルでは消えない。OKで消えて一覧に戻り、「メモを削除しました。」の通知が出る |
+| 一番古いメモの☆を押す | ★に変わって一覧の先頭に移動し、「ピン留めしました。」の通知が出る |
+| 詳細ページで「ピン留めを外す」を押す | 一覧ではなく、同じ詳細ページに戻る |
+| `flask db upgrade`のあとに`sqlite3 memos.db "SELECT id, title, is_pinned FROM memos;"`を実行する | 既存のメモが消えずに残り、`is_pinned`が`0`になっている |
+
+**解答例**：このアプリ（100_memo_api）のコードが解答例です。編集は`memos/views.py`の`update()`と`templates/memos/update.html`・`_form.html`、削除は`delete()`、ピン留めは`toggle_pin()`と`models.py`の`is_pinned`を見てください。100ではBlueprintに`url_prefix='/memos'`を付けていて関数名も違う（一覧は`index()`、エンドポイントは`memos.index`）ので、17章の名前に読み替えて比べます。

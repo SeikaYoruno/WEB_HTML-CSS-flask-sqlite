@@ -5,19 +5,19 @@
 {% block content %}
 <h1>メモを追加</h1>
 
-<form method="post">
+{#
+    02_backend/02_memo_app_frontend の new.html と同じフォーム
+    novalidate：ブラウザ標準のチェックを止める。空欄のまま送信して、サーバー側（WTForms）のチェックを確かめられる
+    required・maxlength：:user-invalid（style.css）で、操作した後に不正な値なら赤枠にする
+    文字数カウンター（#body-count）は script.js が動かす
+#}
+<form method="post" class="memo-form" novalidate>
     {{ form.csrf_token }}
 
     <div class="field">
         {{ form.title.label }}
-        {{ form.title() }}
-        {% if form.title.errors %}
-        <ul class="errors">
-            {% for error in form.title.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+        {{ form.title(required=True, maxlength=100, autocomplete="off") }}
+        {% for error in form.title.errors %}<p class="server-error">{{ error }}</p>{% endfor %}
     </div>
 
     <div class="field">
@@ -27,14 +27,9 @@
 
     <div class="field">
         {{ form.body.label }}
-        {{ form.body() }}
-        {% if form.body.errors %}
-        <ul class="errors">
-            {% for error in form.body.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+        {{ form.body(required=True, maxlength=500, rows=5) }}
+        <p class="char-count"><span id="body-count">0</span> / 500文字</p>
+        {% for error in form.body.errors %}<p class="server-error">{{ error }}</p>{% endfor %}
     </div>
 
     {{ form.submit() }}

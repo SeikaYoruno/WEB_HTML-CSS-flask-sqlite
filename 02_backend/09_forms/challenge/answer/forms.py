@@ -15,4 +15,4 @@ class MemoForm(FlaskForm):
     title = StringField('タイトル', validators=[DataRequired(), Length(max=100)])
     category = SelectField('カテゴリ', choices=CATEGORY_CHOICES)
     body = TextAreaField('本文', validators=[DataRequired(), Length(max=500)])
-    submit = SubmitField('追加する')
+    submit = SubmitField('保存する')

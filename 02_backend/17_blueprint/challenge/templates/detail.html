@@ -3,11 +3,16 @@
 {% block title %}{{ title }} - メモ帳{% endblock %}
 
 {% block content %}
-<div class="detail">
+<article class="detail">
     <span class="tag">{{ category }}</span>
     <h1>{{ title }}</h1>
     <p>{{ body }}</p>
-    {% if due_date_line %}<p>{{ due_date_line }}</p>{% endif %}
-    <a class="back-link" href="/">一覧へ戻る</a>
-</div>
+    {% if due_date %}
+    <dl class="detail-meta">
+        <dt>期限</dt>
+        <dd><time datetime="{{ due_date }}">{{ due_date }}</time></dd>
+    </dl>
+    {% endif %}
+    <a class="back-link" href="/">メモ一覧へ戻る</a>
+</article>
 {% endblock %}

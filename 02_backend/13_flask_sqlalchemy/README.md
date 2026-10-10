@@ -17,7 +17,7 @@ pip install flask-sqlalchemy
 
 ## 目次
 
-- [11 SQLAlchemy との違い](#11-sqlalchemy-との違い)
+- [12 SQLAlchemy との違い](#12-sqlalchemy-との違い)
 - [1. セットアップ](#1-セットアップ)
 - [2. with 文と app_context](#2-with-文と-app_context)
 - [3. モデルの定義](#3-モデルの定義)
@@ -53,9 +53,9 @@ pip install flask-sqlalchemy
 
 ---
 
-## 11 SQLAlchemy との違い
+## 12 SQLAlchemy との違い
 
-| 比較 | 11 生 SQLAlchemy | 12 Flask-SQLAlchemy |
+| 比較 | 12 生 SQLAlchemy | 13 Flask-SQLAlchemy |
 |---|---|---|
 | モデル基底クラス | `Base = declarative_base()` | `db.Model` |
 | カラム定義 | `Column(Integer, ...)` | `db.Column(db.Integer, ...)` |

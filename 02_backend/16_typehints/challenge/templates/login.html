@@ -10,7 +10,7 @@
 
     <div class="field">
         {{ form.username.label }}
-        {{ form.username() }}
+        {{ form.username(required=True, maxlength=50, autocomplete="username") }}
         {% if form.username.errors %}
         <ul class="errors">
             {% for error in form.username.errors %}
@@ -22,7 +22,7 @@
 
     <div class="field">
         {{ form.password.label }}
-        {{ form.password() }}
+        {{ form.password(required=True, autocomplete="current-password") }}
         {% if form.password.errors %}
         <ul class="errors">
             {% for error in form.password.errors %}
@@ -34,5 +34,6 @@
 
     {{ form.submit() }}
 </form>
-<p><a href="{{ url_for('register') }}">アカウントをお持ちでない方はこちら</a></p>
+{# リンクの文字を「こちら」にせず、行き先がわかる文字にする（01_frontend/03_html_semantic_form 1節） #}
+<p>アカウントをお持ちでない方は <a href="{{ url_for('register') }}">新規登録</a></p>
 {% endblock %}

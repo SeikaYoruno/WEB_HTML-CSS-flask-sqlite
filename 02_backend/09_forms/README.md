@@ -41,6 +41,9 @@
     ├── memos.json
     ├── static/
     ├── templates/
+    │   ├── base.html     # 共通レイアウト（ナビに「メモを追加」が増えた）
+    │   ├── top.html      # メモ一覧（02_backend/08_requestと同じ）
+    │   ├── detail.html   # メモ詳細（02_backend/08_requestと同じ）
     │   └── new_memo.html # メモ追加フォーム（完成済み）
     └── answer/
         ├── challenge.py
@@ -690,7 +693,7 @@ python 02_backend/09_forms/challenge/challenge.py
 - `MemoForm`は`FlaskForm`を継承済みなので、CSRF保護と`validate_on_submit()`がそのまま使える（セクション4）
 - `memos_list`（`memos.json`から読み込んだリスト）に新しいメモの辞書を`append`し、`memos`（idをキーにした辞書）にも追加する
 - 最後に`with open(MEMOS_PATH, 'w', encoding='utf-8') as f: json.dump(memos_list, f, ...)`で`memos.json`に書き戻す（`02_backend/07_with`で学んだJSON書き込み）
-- 保存が終わったら`redirect(url_for('book_list'))`で一覧に戻る（PRGパターン、セクション5）
+- 保存が終わったら`redirect(url_for('memo_list'))`で一覧に戻る（PRGパターン、セクション5）
 
 #### 動作確認の流れ
 

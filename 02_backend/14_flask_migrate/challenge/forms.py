@@ -15,5 +15,5 @@ class MemoForm(FlaskForm):
     title = StringField('タイトル', validators=[DataRequired(), Length(max=100)])
     category = SelectField('カテゴリ', choices=CATEGORY_CHOICES)
     body = TextAreaField('本文', validators=[DataRequired(), Length(max=500)])
-    due_date = StringField('期限（任意・例: 2026-08-10）', validators=[Optional(), Length(max=50)])
-    submit = SubmitField('追加する')
+    due_date = StringField('期限（任意）', validators=[Optional(), Length(max=50)])
+    submit = SubmitField('保存する')

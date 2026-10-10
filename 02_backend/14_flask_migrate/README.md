@@ -312,14 +312,15 @@ python challenge.py
 |---|---|
 | 1 | `Migrate(app, db)` を追加してマイグレーションを有効にする（`db.create_all()`は使わない） |
 | 2 | `Memo`モデルに`due_date`カラムを追加する（既存の5件のデータが壊れないよう`nullable`にする） |
-| 3 | `/memos/<int:memo_id>`で`memo.due_date`から`due_date_line`を作り、`/memos/new`で`new.due_date = form.due_date.data`を設定する |
+| 3 | `/memos/<int:memo_id>`で`memo.due_date`を`due_date`としてテンプレートに渡し（メモが無いときは`None`）、`/memos/new`で`new.due_date = form.due_date.data`を設定する |
 
 #### ヒント
 
 - モデルへのカラム追加は`db.Column(db.String, nullable=True)`のように書く（本章セクション4）。`nullable`にしないと、既存の5件（due_dateを持たない行）へのマイグレーションが失敗する
 - `flask db migrate`を実行すると`memos.due_date`カラムの追加が自動検出される（セクション3・4）
-- `due_date_line`は`memo.due_date`が未設定（`None`）のときに空文字にしておくと、テンプレート側の`{% if due_date_line %}`で表示を切り替えられる
-- フォーム（`forms.py`）とテンプレート（`new_memo.html`・`detail.html`）の`due_date`対応はすでに用意されているので、Pythonコードのみ変更すればよい。`forms.py`の`due_date`フィールドには`wtforms.validators`の`Optional()`（入力必須にしない）が使われている。`02_backend/16_typehints`で学ぶ`typing.Optional`とは**別物**（こちらはWTFormsのバリデーター）なので注意
+- `detail.html`は`{% if due_date %}`で、期限があるときだけ`<dl class="detail-meta">`の「期限」欄を出す（`02_memo_app_frontend`の`detail.js`で、期限の無いメモの`dl`を隠していたのと同じ）。`<time datetime="{{ due_date }}">`に使うので、`"期限: …"`のような文字列に加工せず、`2026-10-07`の形のまま渡す
+- 一覧（`top.html`）のカードにも、期限があるメモだけ`期限：2026-10-07`の行が出る（`memo.due_date`を直接参照しているので、Python側の変更は不要）
+- フォーム（`forms.py`）とテンプレート（`new_memo.html`・`detail.html`・`top.html`）の`due_date`対応はすでに用意されているので、Pythonコードのみ変更すればよい。期限の入力欄は、テンプレートで`form.due_date(type="date")`としているので日付選択になり、`2026-10-07`の形の文字列が送られる。`forms.py`の`due_date`フィールドには`wtforms.validators`の`Optional()`（入力必須にしない）が使われている。`02_backend/16_typehints`で学ぶ`typing.Optional`とは**別物**（こちらはWTFormsのバリデーター）なので注意
 - 見た目やCSRFの仕組みは`02_backend/13_flask_sqlalchemy`から変更不要
 
 ### 動作確認：db.create_all()からの移行後も既存メモが壊れていないか
@@ -333,8 +334,8 @@ python challenge.py
 |---|---|
 | 問題1の`flask db upgrade`実行後に`http://127.0.0.1:5039/`にアクセスする | `02_backend/13_flask_sqlalchemy`から引き継いだ既存の5件のメモが、これまで通り表示される |
 | 問題2の`flask db migrate -m "add due_date column"` → `upgrade`実行後 | エラーなく完了する（`nullable=True`にしていれば、既存5件に`due_date`が無くてもマイグレーションが失敗しない） |
-| 問題3完了後、既存メモ（`due_date`未設定）の詳細ページを見る | エラーにならず、期限の表示欄が空になっている（`due_date_line`が空文字になる分岐が効いている） |
-| 問題3完了後、`/memos/new`で期限を指定して新しいメモを追加する | 詳細ページに指定した期限が表示される |
+| 問題3完了後、既存メモ（`due_date`未設定）の詳細ページを見る | エラーにならず、「期限」の欄そのものが表示されない（`due_date`が`None`なので`{% if due_date %}`が偽になる） |
+| 問題3完了後、`/memos/new`で期限を指定して新しいメモを追加する | 詳細ページの「期限」欄と、一覧のカードの「期限：」の行に、指定した期限が表示される |
 
 **正常な状態の見分け方**：カラム追加の前後で、既存のメモ（元々あった5件）が消えたり内容が変わったりしていないことが最も重要な確認ポイントです。既存メモの詳細ページでエラーになる場合は、`nullable`の指定漏れか、`due_date`が`None`のケースを考慮していないテンプレート分岐を疑ってください。
 

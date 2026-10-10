@@ -21,12 +21,14 @@ SQLite CLI を使って SQL の基本命令を学びます。Python や Flask �
 ├── README.md          このファイル
 ├── basic/
 │   ├── README.md      基礎の学習内容
-│   ├── example/       基礎 SQL サンプル（01〜05 + practice）
-│   └── answer/        基礎 練習問題の解答
+│   ├── example/       基礎 SQL サンプル（ex01〜ex07）
+│   └── question/      基礎 練習問題（question01〜06）
+│       └── answer/    基礎 練習問題の解答（answer01〜06）
 └── advanced/
     ├── README.md      応用の学習内容
-    ├── example/       応用 SQL サンプル（01〜05 + practice）
-    └── answer/        応用 練習問題の解答
+    ├── example/       応用 SQL サンプル（ex01〜ex03）
+    └── question/      応用 練習問題（question01〜06・setup.sql）
+        └── answer/    応用 練習問題の解答（answer01〜06）
 ```
 
 ---
