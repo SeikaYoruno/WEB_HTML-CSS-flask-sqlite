@@ -20,24 +20,24 @@
 
 | 用語 | 意味 | 詳しく学ぶ章 |
 |---|---|---|
-| **クライアント** | サービスを利用する側。Webではブラウザのこと | [01_web_basic](../../01_frontend/01_web_basic/) 1節 |
-| **サーバー** | クライアントからの依頼に応えて、データやページを返す側のコンピュータ（またはプログラム） | [01_web_basic](../../01_frontend/01_web_basic/) 1節 |
-| **フロントエンド** | ブラウザの中で動く部分（HTML・CSS・JavaScript） | [01_web_basic](../../01_frontend/01_web_basic/) 2節 |
-| **バックエンド** | サーバーの中で動く部分（Python・Flask・データベース） | [01_web_basic](../../01_frontend/01_web_basic/) 2節 |
-| **URL** | Web上の場所を表す住所。`https://example.com/memos?category=仕事`のように、スキーム・ドメイン・パス・クエリなどからなる | [01_web_basic](../../01_frontend/01_web_basic/) 3節 |
-| **HTTP** | ブラウザとサーバーがやりとりするときの決まり（プロトコル）。暗号化したものが**HTTPS** | [01_web_basic](../../01_frontend/01_web_basic/) 6節 |
-| **リクエスト** | クライアントからサーバーへ送る「このページをください」「このデータを保存して」という依頼。メソッド・URL・ヘッダー・ボディからなる | [01_web_basic](../../01_frontend/01_web_basic/) 4節・[08_request](../../02_backend/08_request/) |
-| **レスポンス** | リクエストに対してサーバーが返す返事。ステータスコード・ヘッダー・ボディ（HTMLやJSONなど）からなる | [01_web_basic](../../01_frontend/01_web_basic/) 4節 |
-| **HTTPメソッド** | リクエストの種類。GET（取得）・POST（送信・作成）・PUT（丸ごと更新）・PATCH（一部更新）・DELETE（削除）など | [01_web_basic](../../01_frontend/01_web_basic/) 4節・[08_request](../../02_backend/08_request/) 1節 |
-| **ステータスコード** | レスポンスの結果を表す3桁の数字。200（成功）・302（リダイレクト）・404（見つからない）・500（サーバー内部のエラー）など | [01_web_basic](../../01_frontend/01_web_basic/) 5節・[04_flask_basic](../../02_backend/04_flask_basic/) 5節 |
-| **ヘッダー** | リクエストやレスポンスに付く補足情報。データの種類（`Content-Type`）やCookieなどを伝える | [01_web_basic](../../01_frontend/01_web_basic/) 4節 |
-| **静的サイト／動的サイト** | 静的サイトは、いつ誰が見ても同じファイルを返すサイト。動的サイトは、人や条件によってサーバーが内容を作って返すサイト | [01_web_basic](../../01_frontend/01_web_basic/) 7節 |
-| **ドメイン・DNS** | ドメインは`example.com`のような人が覚えやすい名前。DNSは、ドメインをIPアドレスに変換するしくみ | [01_web_basic](../../01_frontend/01_web_basic/) 8節 |
-| **IPアドレス** | ネットワーク上のコンピュータの番号。`127.0.0.1`（自分自身）など | [01_web_basic](../../01_frontend/01_web_basic/) 9節 |
+| **クライアント** | サービスを利用する側。Webではブラウザのこと | [web_basic](../web_basic/) 1節 |
+| **サーバー** | クライアントからの依頼に応えて、データやページを返す側のコンピュータ（またはプログラム） | [web_basic](../web_basic/) 1節 |
+| **フロントエンド** | ブラウザの中で動く部分（HTML・CSS・JavaScript） | [web_basic](../web_basic/) 2節 |
+| **バックエンド** | サーバーの中で動く部分（Python・Flask・データベース） | [web_basic](../web_basic/) 2節 |
+| **URL** | Web上の場所を表す住所。`https://example.com/memos?category=仕事`のように、スキーム・ドメイン・パス・クエリなどからなる | [web_basic](../web_basic/) 3節 |
+| **HTTP** | ブラウザとサーバーがやりとりするときの決まり（プロトコル）。暗号化したものが**HTTPS** | [web_basic](../web_basic/) 6節 |
+| **リクエスト** | クライアントからサーバーへ送る「このページをください」「このデータを保存して」という依頼。メソッド・URL・ヘッダー・ボディからなる | [web_basic](../web_basic/) 4節・[08_request](../../02_backend/08_request/) |
+| **レスポンス** | リクエストに対してサーバーが返す返事。ステータスコード・ヘッダー・ボディ（HTMLやJSONなど）からなる | [web_basic](../web_basic/) 4節 |
+| **HTTPメソッド** | リクエストの種類。GET（取得）・POST（送信・作成）・PUT（丸ごと更新）・PATCH（一部更新）・DELETE（削除）など | [web_basic](../web_basic/) 4節・[08_request](../../02_backend/08_request/) 1節 |
+| **ステータスコード** | レスポンスの結果を表す3桁の数字。200（成功）・302（リダイレクト）・404（見つからない）・500（サーバー内部のエラー）など | [web_basic](../web_basic/) 5節・[04_flask_basic](../../02_backend/04_flask_basic/) 5節 |
+| **ヘッダー** | リクエストやレスポンスに付く補足情報。データの種類（`Content-Type`）やCookieなどを伝える | [web_basic](../web_basic/) 4節 |
+| **静的サイト／動的サイト** | 静的サイトは、いつ誰が見ても同じファイルを返すサイト。動的サイトは、人や条件によってサーバーが内容を作って返すサイト | [web_basic](../web_basic/) 7節 |
+| **ドメイン・DNS** | ドメインは`example.com`のような人が覚えやすい名前。DNSは、ドメインをIPアドレスに変換するしくみ | [web_basic](../web_basic/) 8節 |
+| **IPアドレス** | ネットワーク上のコンピュータの番号。`127.0.0.1`（自分自身）など | [web_basic](../web_basic/) 9節 |
 | **ポート** | 1台のコンピュータの中で、どのプログラムに通信を届けるかを表す番号。`http://127.0.0.1:5000/`の`5000` | [04_flask_basic](../../02_backend/04_flask_basic/) 1節 |
-| **API** | プログラムどうしがやりとりするための窓口。Webでは、URLにリクエストを送るとJSONでデータを返すものを指すことが多い（**Web API**・**JSON API**） | [09_js_data](../../01_frontend/09_js_data/) 6節・[08_request](../../02_backend/08_request/) 2節 |
-| **CRUD** | データに対する4つの基本操作。Create（作成）・Read（読み取り）・Update（更新）・Delete（削除） | [01_web_basic](../../01_frontend/01_web_basic/) 4節・[10_sql](../../02_backend/10_sql/) |
-| **開発者ツール** | ブラウザに付いている、HTML・CSS・通信の中身などを確かめる道具。F12キーで開く | [01_web_basic](../../01_frontend/01_web_basic/) 10節・[02_html_basics](../../01_frontend/02_html_basics/) 0節 |
+| **API** | プログラムどうしがやりとりするための窓口。Webでは、URLにリクエストを送るとJSONでデータを返すものを指すことが多い（**Web API**・**JSON API**） | [08_js_data](../../01_frontend/08_js_data/) 6節・[08_request](../../02_backend/08_request/) 2節 |
+| **CRUD** | データに対する4つの基本操作。Create（作成）・Read（読み取り）・Update（更新）・Delete（削除） | [web_basic](../web_basic/) 4節・[10_sql](../../02_backend/10_sql/) |
+| **開発者ツール** | ブラウザに付いている、HTML・CSS・通信の中身などを確かめる道具。F12キーで開く | [web_basic](../web_basic/) 10節・[01_html_basics](../../01_frontend/01_html_basics/) 0節 |
 
 ---
 
@@ -45,16 +45,16 @@
 
 | 用語 | 意味 | 詳しく学ぶ章 |
 |---|---|---|
-| **要素・タグ・属性** | `<a href="...">リンク</a>`全体が要素、`<a>`・`</a>`がタグ、`href="..."`が属性 | [02_html_basics](../../01_frontend/02_html_basics/) 1節 |
-| **セマンティックHTML** | `<header>`・`<nav>`・`<main>`など、内容の意味を表すタグで書くこと | [03_html_semantic_form](../../01_frontend/03_html_semantic_form/) 1節 |
-| **アクセシビリティ** | 目や耳が不自由な人、キーボードだけで操作する人なども含めて、誰でも使えるようにすること | [03_html_semantic_form](../../01_frontend/03_html_semantic_form/) 1節 |
-| **セレクタ** | CSSで「どの要素に」スタイルを当てるかを指定する書き方。`.memo`・`#flash`・`a:hover`など。JavaScriptの`querySelector()`でも使う | [04_css_basics](../../01_frontend/04_css_basics/) 2節 |
-| **カスケード・詳細度** | 同じ要素に複数のスタイルが当たったとき、どれを使うかの決まり | [04_css_basics](../../01_frontend/04_css_basics/) 3節 |
-| **ボックスモデル** | 要素を「内容・padding・border・margin」の四角い箱として扱う考え方 | [04_css_basics](../../01_frontend/04_css_basics/) 4節 |
-| **Flexbox・Grid** | 要素を横や縦、格子状に並べるCSSのしくみ | [05_css_layout](../../01_frontend/05_css_layout/) 1・2節 |
-| **レスポンシブ** | 画面の幅に合わせて、レイアウトを切り替えること。**メディアクエリ**（`@media`）で書く | [05_css_layout](../../01_frontend/05_css_layout/) 4節 |
-| **モバイルファースト** | スマホ向けのスタイルを先に書き、広い画面向けのスタイルをメディアクエリで足していく書き方 | [05_css_layout](../../01_frontend/05_css_layout/) 4節 |
-| **CSS変数** | `--main-color: #333;`のように値に名前を付け、`var(--main-color)`で使い回すしくみ。ダークモードの切り替えにも使う | [05_css_layout](../../01_frontend/05_css_layout/) 5節 |
+| **要素・タグ・属性** | `<a href="...">リンク</a>`全体が要素、`<a>`・`</a>`がタグ、`href="..."`が属性 | [01_html_basics](../../01_frontend/01_html_basics/) 1節 |
+| **セマンティックHTML** | `<header>`・`<nav>`・`<main>`など、内容の意味を表すタグで書くこと | [02_html_semantic_form](../../01_frontend/02_html_semantic_form/) 1節 |
+| **アクセシビリティ** | 目や耳が不自由な人、キーボードだけで操作する人なども含めて、誰でも使えるようにすること | [02_html_semantic_form](../../01_frontend/02_html_semantic_form/) 1節 |
+| **セレクタ** | CSSで「どの要素に」スタイルを当てるかを指定する書き方。`.memo`・`#flash`・`a:hover`など。JavaScriptの`querySelector()`でも使う | [03_css_basics](../../01_frontend/03_css_basics/) 2節 |
+| **カスケード・詳細度** | 同じ要素に複数のスタイルが当たったとき、どれを使うかの決まり | [03_css_basics](../../01_frontend/03_css_basics/) 3節 |
+| **ボックスモデル** | 要素を「内容・padding・border・margin」の四角い箱として扱う考え方 | [03_css_basics](../../01_frontend/03_css_basics/) 4節 |
+| **Flexbox・Grid** | 要素を横や縦、格子状に並べるCSSのしくみ | [04_css_layout](../../01_frontend/04_css_layout/) 1・2節 |
+| **レスポンシブ** | 画面の幅に合わせて、レイアウトを切り替えること。**メディアクエリ**（`@media`）で書く | [04_css_layout](../../01_frontend/04_css_layout/) 4節 |
+| **モバイルファースト** | スマホ向けのスタイルを先に書き、広い画面向けのスタイルをメディアクエリで足していく書き方 | [04_css_layout](../../01_frontend/04_css_layout/) 4節 |
+| **CSS変数** | `--main-color: #333;`のように値に名前を付け、`var(--main-color)`で使い回すしくみ。ダークモードの切り替えにも使う | [04_css_layout](../../01_frontend/04_css_layout/) 5節 |
 
 ---
 
@@ -62,15 +62,15 @@
 
 | 用語 | 意味 | 詳しく学ぶ章 |
 |---|---|---|
-| **DOM** | ブラウザが、HTMLを読み込んで作る「要素の木構造」。JavaScriptはDOMを通してページを書き換える | [07_js_dom_events](../../01_frontend/07_js_dom_events/) 1節 |
-| **イベント** | クリック・入力・送信など、ページの上で起きたできごと。`addEventListener()`で、起きたときの処理を登録する | [07_js_dom_events](../../01_frontend/07_js_dom_events/) 2節 |
-| **コールバック関数** | 「あとで呼び出してもらう」ために、別の関数に渡す関数 | [06_js_basics](../../01_frontend/06_js_basics/) 2節 |
-| **XSS**（クロスサイトスクリプティング） | 入力された文字列をHTMLとして表示してしまい、悪意あるスクリプトが動いてしまう攻撃。`innerHTML`ではなく`textContent`を使うのが基本の対策 | [07_js_dom_events](../../01_frontend/07_js_dom_events/) 1節 |
-| **JSON** | `{"title": "買い物", "is_pinned": true}`のように、データを文字で表す書き方。ブラウザとサーバーのやりとりや、ファイルへの保存に使う | [09_js_data](../../01_frontend/09_js_data/) 1節・[07_with](../../02_backend/07_with/) 7節 |
-| **非同期処理** | 通信など時間のかかる処理の完了を待たずに、ほかの処理を進めるしくみ。`async`／`await`で書く | [09_js_data](../../01_frontend/09_js_data/) 2節 |
-| **fetch()** | JavaScriptからサーバーにリクエストを送る関数 | [09_js_data](../../01_frontend/09_js_data/) 2節 |
-| **Ajax** | ページを再読み込みせずに、通信して画面の一部だけを書き換えるやり方 | [09_js_data](../../01_frontend/09_js_data/) 2節 |
-| **localStorage** | ブラウザの中にデータ（文字列）を保存するしくみ。ページを閉じても消えないが、そのブラウザの中にしか無い | [09_js_data](../../01_frontend/09_js_data/) 4節・[02_memo_app_frontend](../../02_backend/02_memo_app_frontend/) |
+| **DOM** | ブラウザが、HTMLを読み込んで作る「要素の木構造」。JavaScriptはDOMを通してページを書き換える | [06_js_dom_events](../../01_frontend/06_js_dom_events/) 1節 |
+| **イベント** | クリック・入力・送信など、ページの上で起きたできごと。`addEventListener()`で、起きたときの処理を登録する | [06_js_dom_events](../../01_frontend/06_js_dom_events/) 2節 |
+| **コールバック関数** | 「あとで呼び出してもらう」ために、別の関数に渡す関数 | [05_js_basics](../../01_frontend/05_js_basics/) 2節 |
+| **XSS**（クロスサイトスクリプティング） | 入力された文字列をHTMLとして表示してしまい、悪意あるスクリプトが動いてしまう攻撃。`innerHTML`ではなく`textContent`を使うのが基本の対策 | [06_js_dom_events](../../01_frontend/06_js_dom_events/) 1節 |
+| **JSON** | `{"title": "買い物", "is_pinned": true}`のように、データを文字で表す書き方。ブラウザとサーバーのやりとりや、ファイルへの保存に使う | [08_js_data](../../01_frontend/08_js_data/) 1節・[07_with](../../02_backend/07_with/) 7節 |
+| **非同期処理** | 通信など時間のかかる処理の完了を待たずに、ほかの処理を進めるしくみ。`async`／`await`で書く | [08_js_data](../../01_frontend/08_js_data/) 2節 |
+| **fetch()** | JavaScriptからサーバーにリクエストを送る関数 | [08_js_data](../../01_frontend/08_js_data/) 2節 |
+| **Ajax** | ページを再読み込みせずに、通信して画面の一部だけを書き換えるやり方 | [08_js_data](../../01_frontend/08_js_data/) 2節 |
+| **localStorage** | ブラウザの中にデータ（文字列）を保存するしくみ。ページを閉じても消えないが、そのブラウザの中にしか無い | [08_js_data](../../01_frontend/08_js_data/) 4節・[02_memo_app_frontend](../../02_backend/02_memo_app_frontend/) |
 
 ---
 
@@ -118,7 +118,7 @@
 
 | 用語 | 意味 | 詳しく学ぶ章 |
 |---|---|---|
-| **フォーム** | 入力欄と送信ボタンで、データをサーバーに送るしくみ。`<form method="post">` | [03_html_semantic_form](../../01_frontend/03_html_semantic_form/) 2節・[09_forms](../../02_backend/09_forms/) 1節 |
+| **フォーム** | 入力欄と送信ボタンで、データをサーバーに送るしくみ。`<form method="post">` | [02_html_semantic_form](../../01_frontend/02_html_semantic_form/) 2節・[09_forms](../../02_backend/09_forms/) 1節 |
 | **バリデーション（入力チェック）** | 送られた値が正しいか（空でないか・長すぎないかなど）を確かめること。ブラウザ側のチェックは無効にできるので、サーバー側でも必ず行う | [09_forms](../../02_backend/09_forms/) 3節 |
 | **WTForms・Flask-WTF** | フォームの項目と入力チェックをPythonのクラスで書くライブラリ。Flask-WTFはそれをFlaskで使いやすくし、CSRF対策を加えたもの | [09_forms](../../02_backend/09_forms/) 2〜4節 |
 | **CSRF**（クロスサイトリクエストフォージェリ） | ログイン中の人に、別のサイトから気づかないうちにリクエストを送らせる攻撃。フォームに**CSRFトークン**（サーバーが発行した合言葉）を埋め込み、一致しない送信を断って防ぐ | [09_forms](../../02_backend/09_forms/) 4節・[15_login](../../02_backend/15_login/) 1節 |
@@ -170,6 +170,6 @@
 | **pip** | Pythonのライブラリをインストールするコマンド。`pip install -r 00_docs/setup/requirements.txt`で、一覧に書いたライブラリをまとめて入れられる | [setup/backend.md](../setup/backend.md) |
 | **仮想環境（venv）** | プロジェクトごとに、ライブラリを分けて入れておく場所。このカリキュラムでは`flaskenv` | [setup/backend.md](../setup/backend.md) |
 | **ターミナル** | 文字でコマンドを打ってコンピュータを操作する画面 | [setup/frontend.md](../setup/frontend.md) |
-| **ローカルサーバー** | 自分のパソコンの中で動かすサーバー。`python -m http.server`やFlaskの`app.run()`。`127.0.0.1`（`localhost`）でアクセスする | [09_js_data](../../01_frontend/09_js_data/) 0節・[04_flask_basic](../../02_backend/04_flask_basic/) 1節 |
+| **ローカルサーバー** | 自分のパソコンの中で動かすサーバー。`python -m http.server`やFlaskの`app.run()`。`127.0.0.1`（`localhost`）でアクセスする | [08_js_data](../../01_frontend/08_js_data/) 0節・[04_flask_basic](../../02_backend/04_flask_basic/) 1節 |
 | **curl** | ターミナルからHTTPリクエストを送るコマンド。ブラウザでは送りにくいPOST・PUT・DELETEを試すのに使う | [08_request](../../02_backend/08_request/) 1節 |
 | **Git・GitHub** | Gitはファイルの変更履歴を記録する道具。GitHubは、Gitで記録したものをネット上に置いて共有するサービス | [github/](../github/) |

@@ -13,10 +13,9 @@ Webアプリを基礎から作れるようになるための、番号付きチ�
 ## 全体像
 
 ```
-├── 00_docs/      環境構築・用語集・Pythonの文法リファレンス・GitHubの使い方
+├── 00_docs/      環境構築・Webページが表示されるしくみ・用語集・Pythonの文法リファレンス・GitHubの使い方
 │
 ├── 01_frontend/  フロントエンド編
-│     01_web_basic：Webページが表示されるしくみ（導入）
 │     ゴール：オリジナルHP（自分を紹介するサイト。補足として公開方法も）
 │
 └── 02_backend/   バックエンド編
@@ -33,16 +32,15 @@ Webアプリを基礎から作れるようになるための、番号付きチ�
 ## 進捗
 
 ### フロントエンド編
-- [ ] 01_frontend/01_web_basic — Webページが表示されるしくみ
-- [ ] 01_frontend/02_html_basics — 開発環境と開発者ツール・HTML文書の骨組み・テキストと基本タグ・表
-- [ ] 01_frontend/03_html_semantic_form — セマンティックHTMLとアクセシビリティ・フォーム
-- [ ] 01_frontend/04_css_basics — CSSの書き方と単位・セレクタ・カスケードと詳細度・ボックスモデル・文字と装飾
-- [ ] 01_frontend/05_css_layout — Flexbox・Grid・position・レスポンシブ対応・CSS変数とトランジション
-- [ ] 01_frontend/06_js_basics — JavaScriptの読み込みとデバッグ・基本文法・真偽の判定・関数とコールバック・配列メソッド
-- [ ] 01_frontend/07_js_dom_events — DOM操作・イベント・絞り込み
-- [ ] 01_frontend/08_js_ui — タブ・ポップアップ・モーダルウィンドウ・スライドショー・スクロール
-- [ ] 01_frontend/09_js_data — JSON・`fetch()`・`async`/`await`・エラー処理・`localStorage`・データから画面を作る・HTTPメソッドの体験
-- [ ] 01_frontend/10_homepage — オリジナルHPの仕上げ（フロントエンド編のゴール）
+- [ ] 01_frontend/01_html_basics — 開発環境と開発者ツール・HTML文書の骨組み・テキストと基本タグ・表
+- [ ] 01_frontend/02_html_semantic_form — セマンティックHTMLとアクセシビリティ・フォーム
+- [ ] 01_frontend/03_css_basics — CSSの書き方と単位・セレクタ・カスケードと詳細度・ボックスモデル・文字と装飾
+- [ ] 01_frontend/04_css_layout — Flexbox・Grid・position・レスポンシブ対応・CSS変数とトランジション
+- [ ] 01_frontend/05_js_basics — JavaScriptの読み込みとデバッグ・基本文法・真偽の判定・関数とコールバック・配列メソッド
+- [ ] 01_frontend/06_js_dom_events — DOM操作・イベント・絞り込み
+- [ ] 01_frontend/07_js_ui — タブ・ポップアップ・モーダルウィンドウ・スライドショー・スクロール
+- [ ] 01_frontend/08_js_data — JSON・`fetch()`・`async`/`await`・エラー処理・`localStorage`・データから画面を作る・HTTPメソッドの体験
+- [ ] 01_frontend/09_homepage — オリジナルHPの仕上げ（フロントエンド編のゴール）
 - [ ] 01_frontend/00_my_homepage — 自分のオリジナルHP（各章の制作課題で育てる）
 
 ### バックエンド編：完成形（最初に触ってみる）
@@ -83,7 +81,7 @@ Webアプリを基礎から作れるようになるための、番号付きチ�
 
 ## 進め方
 
-1. [00_docs/setup/frontend.md](00_docs/setup/frontend.md)の手順で、ブラウザ・VS Code・拡張機能を用意してから、[フロントエンド編](01_frontend/)を`01_web_basic`から順に進める。最初の章で、Webサイトがどう動いているかの全体像をつかむ。各章の最後にある「制作課題」で、[01_frontend/00_my_homepage](01_frontend/00_my_homepage/)に自分のオリジナルHPを少しずつ作っていく
+1. [00_docs/setup/frontend.md](00_docs/setup/frontend.md)の手順で、ブラウザ・VS Code・拡張機能を用意してから、[フロントエンド編](01_frontend/)を`01_html_basics`から順に進める。URLやリクエストなど、Webサイトがどう動いているかは、必要に応じて[00_docs/web_basic](00_docs/web_basic/)で確かめる。各章の最後にある「制作課題」で、[01_frontend/00_my_homepage](01_frontend/00_my_homepage/)に自分のオリジナルHPを少しずつ作っていく
 2. [02_backend/100_memo_api](02_backend/100_memo_api/)を実行し（[00_docs/setup/backend.md](00_docs/setup/backend.md)の環境が必要）、バックエンド編で最終的にどんなアプリができあがるのかを体験する
 3. [00_docs/setup/backend.md](00_docs/setup/backend.md)の手順で、Python・仮想環境・ライブラリ・VS Codeの拡張機能を用意してから、[バックエンド編](02_backend/)を`01_intro`から`17_blueprint`まで順に進める。学んだ内容は[02_backend/00_my_app](02_backend/00_my_app/)という**自分だけの統合アプリ**に少しずつ積み上げていく（詳細は後述）
 
@@ -112,18 +110,19 @@ pip install -r 00_docs/setup/requirements.txt
 
 ### フロントエンド編（[01_frontend/](01_frontend/)）
 
+Webページが表示されるしくみ（リクエストとレスポンス・URL・ステータスコード・HTTPS・IPアドレス・開発者ツールのNetworkタブ）は、補足資料の[00_docs/web_basic](00_docs/web_basic/)にまとめています。
+
 | # | チャプター | 学ぶ内容 | オリジナルHP（制作課題） |
 |---|---|---|---|
-| 01 | [web_basic](01_frontend/01_web_basic/) | Webページが表示されるしくみ（リクエストとレスポンス・URL・ステータスコード・HTTPS・IPアドレス・開発者ツールのNetworkタブ） | — |
-| 02 | [html_basics](01_frontend/02_html_basics/) | 開発環境と開発者ツール・HTML文書の骨組み・テキストと基本タグ・表 | — |
-| 03 | [html_semantic_form](01_frontend/03_html_semantic_form/) | セマンティックHTMLとアクセシビリティ・フォーム | ステップ1：4ページのHTML |
-| 04 | [css_basics](01_frontend/04_css_basics/) | CSSの書き方と単位・セレクタ・カスケードと詳細度・ボックスモデル・文字と装飾 | — |
-| 05 | [css_layout](01_frontend/05_css_layout/) | Flexbox・Grid・position・レスポンシブ対応・CSS変数とトランジション | ステップ2：`style.css` |
-| 06 | [js_basics](01_frontend/06_js_basics/) | JavaScriptの読み込みとデバッグ・基本文法・真偽の判定・関数とコールバック・配列メソッド | — |
-| 07 | [js_dom_events](01_frontend/07_js_dom_events/) | DOM操作・イベント（ホバー・フォーカス・submit）・クライアント側での絞り込み | ステップ3：`script.js` |
-| 08 | [js_ui](01_frontend/08_js_ui/) | タブ切り替え・ポップアップ（`popover`）・モーダルウィンドウ（`<dialog>`）・スライドショー・スクロール動作 | （自由課題で使う） |
-| 09 | [js_data](01_frontend/09_js_data/) | JSON・`fetch()`・`async`/`await`・エラー処理・`localStorage`・データから画面を作る・HTTPメソッドの体験（JSONPlaceholder） | ステップ4：データの分離 |
-| 10 | [homepage](01_frontend/10_homepage/) | ファビコン・OGP・画像の最適化・品質チェック・GitHub Pagesでの公開（補足）・全機能を盛り込んだ完成版の作例（`sample/`） | ステップ5：**完成** |
+| 01 | [html_basics](01_frontend/01_html_basics/) | 開発環境と開発者ツール・HTML文書の骨組み・テキストと基本タグ・表 | — |
+| 02 | [html_semantic_form](01_frontend/02_html_semantic_form/) | セマンティックHTMLとアクセシビリティ・フォーム | ステップ1：4ページのHTML |
+| 03 | [css_basics](01_frontend/03_css_basics/) | CSSの書き方と単位・セレクタ・カスケードと詳細度・ボックスモデル・文字と装飾 | — |
+| 04 | [css_layout](01_frontend/04_css_layout/) | Flexbox・Grid・position・レスポンシブ対応・CSS変数とトランジション | ステップ2：`style.css` |
+| 05 | [js_basics](01_frontend/05_js_basics/) | JavaScriptの読み込みとデバッグ・基本文法・真偽の判定・関数とコールバック・配列メソッド | — |
+| 06 | [js_dom_events](01_frontend/06_js_dom_events/) | DOM操作・イベント（ホバー・フォーカス・submit）・クライアント側での絞り込み | ステップ3：`script.js` |
+| 07 | [js_ui](01_frontend/07_js_ui/) | タブ切り替え・ポップアップ（`popover`）・モーダルウィンドウ（`<dialog>`）・スライドショー・スクロール動作 | （自由課題で使う） |
+| 08 | [js_data](01_frontend/08_js_data/) | JSON・`fetch()`・`async`/`await`・エラー処理・`localStorage`・データから画面を作る・HTTPメソッドの体験（JSONPlaceholder。発展・任意） | ステップ4：データの分離 |
+| 09 | [homepage](01_frontend/09_homepage/) | ファビコン・OGP・画像の最適化・品質チェック・GitHub Pagesでの公開（補足）・全機能を盛り込んだ完成版の作例（`sample/`） | ステップ5：**完成** |
 
 ### バックエンド編（[02_backend/](02_backend/)）
 

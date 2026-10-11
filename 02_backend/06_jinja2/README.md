@@ -234,7 +234,7 @@ base.html（共通レイアウト）
 
 ### 3-5. self.ブロック名() — 同じブロックを2回使う
 
-`{% block title %}`の中身を、`<title>`と、SNS用の`<meta property="og:title">`（01_frontend/10_homepage 1節）の両方で使いたいときがあります。同じブロックを2回書くことはできないので、2回目は`{{ self.ブロック名() }}`で呼び出します。
+`{% block title %}`の中身を、`<title>`と、SNS用の`<meta property="og:title">`（01_frontend/09_homepage 1節）の両方で使いたいときがあります。同じブロックを2回書くことはできないので、2回目は`{{ self.ブロック名() }}`で呼び出します。
 
 ```html
 <!-- base.html -->
@@ -246,7 +246,7 @@ base.html（共通レイアウト）
 
 ### 3-6. テンプレートの中で request を使う
 
-テンプレートの中では、今のリクエストの情報（`request`）も使えます（`request`の詳しい使い方は[08_request](../08_request/)で学びます）。`request.endpoint`には「今のページを表示している関数の名前」が入っているので、ナビゲーションで**今いるページのリンクだけに印を付ける**ことができます（01_frontend/03_html_semantic_form の`aria-current="page"`）。
+テンプレートの中では、今のリクエストの情報（`request`）も使えます（`request`の詳しい使い方は[08_request](../08_request/)で学びます）。`request.endpoint`には「今のページを表示している関数の名前」が入っているので、ナビゲーションで**今いるページのリンクだけに印を付ける**ことができます（01_frontend/02_html_semantic_form の`aria-current="page"`）。
 
 ```html
 <a href="{{ url_for('item_list') }}"

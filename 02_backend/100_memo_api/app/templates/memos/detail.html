@@ -4,7 +4,7 @@
 {% block description %}メモ「{{ memo.title }}」の詳細です。{% endblock %}
 
 {% block content %}
-{# H1：article と time（01_frontend/03_html_semantic_form 1節） #}
+{# H1：article と time（01_frontend/02_html_semantic_form 1節） #}
 <article class="detail">
     <span class="tag">{{ memo.category }}</span>
     <h1>{% if memo.is_pinned %}★ {% endif %}{{ memo.title }}</h1>
