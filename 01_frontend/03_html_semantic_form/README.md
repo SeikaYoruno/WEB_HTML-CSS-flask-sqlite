@@ -254,6 +254,26 @@
 | 4 | ラジオボタン・チェックボックスには`value`を付ける。ラジオボタンは「仕事」を最初から選択しておく |
 | 5 | `autocomplete`も付ける（`username` / `email` / `new-password`） |
 
+<details>
+<summary>ヒント：使うタグ</summary>
+
+| タグ・属性 | 使う場所 |
+|---|---|
+| `<div class="field">` | 各項目を囲む |
+| `<label for="...">` | 項目名（`for`は入力欄の`id`と同じにする） |
+| `<input type="text">` / `type="email"` / `type="password"` | ユーザー名 / メールアドレス / パスワード |
+| `required` / `maxlength` / `minlength` | 必須 / 最大文字数 / 最小文字数 |
+| `autocomplete="username"` など | ブラウザの自動入力 |
+| `<p id="..." class="hint">` ＋ `aria-describedby` | パスワードの下のヒントと、入力欄とのつなぎ |
+| `<fieldset>` / `<legend>` | ラジオボタンのまとまり / その見出し「主な用途」 |
+| `<input type="radio" value="..." checked>` | 主な用途（`name`をそろえる。「仕事」に`checked`） |
+| `<input type="checkbox" value="...">` | お知らせメール |
+| `<button type="submit">` | 登録ボタン |
+
+ラジオボタン・チェックボックスは、`<label><input ...> 仕事</label>`のように`label`で囲むと、`for`と`id`を書かなくても文字をクリックして選べます。
+
+</details>
+
 | 確認する操作 | 確認したいこと |
 |---|---|
 | ラベルをクリックする | 対応する入力欄にカーソルが移る |
@@ -293,7 +313,7 @@
 |---|---|
 | 4ページ以上（ホーム `index.html`・プロフィール `about.html`・制作実績 `works.html`・お問い合わせ `contact.html`）。作品がまだ無ければ、制作実績の代わりに「好きなもの紹介」などでもよい | 02_html_basics 1 |
 | 全ページで同じ`header`（サイト名＋`nav`の中にリンクの`ul`）と`footer`を持ち、今いるページのリンクに`aria-current="page"`を付ける | 02_html_basics 2・1 |
-| 各ページに`<title>`と`<meta name="description">`があり、ページごとに内容が違う | 02_html_basics 1 |
+| 各ページに`<title>`があり、ページごとに内容が違う | 02_html_basics 1 |
 | `h1`は各ページ1つ。見出しレベルを飛ばさない | 02_html_basics 2・1 |
 | 画像を1枚以上使い、内容を説明する`alt`を付ける | 02_html_basics 2 |
 | 表（`table`・`caption`・`th scope`）を1つ以上使う（スキル一覧など） | 02_html_basics 3 |
