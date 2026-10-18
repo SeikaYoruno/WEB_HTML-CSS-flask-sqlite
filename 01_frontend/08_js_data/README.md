@@ -607,7 +607,7 @@ form.addEventListener('submit', (event) => {
 
 ### 作り直す要素へのイベントは、親に登録する
 
-`render()`のたびにボタンなどの要素は作り直されるので、要素1つずつに`addEventListener`しても、次の描画で消えてしまいます。そこで、作り直されない**親要素**（一覧の`ul`）に1回だけイベントを登録し、`event.target`で何が押されたかを判定します（05_js_basics の4節で学んだ書き方です）。
+`render()`のたびにボタンなどの要素は作り直されるので、要素1つずつに`addEventListener`しても、次の描画で消えてしまいます。そこで、作り直されない**親要素**（一覧の`ul`）に1回だけイベントを登録し、`event.target`で何が押されたかを判定します（06_js_dom_events の2節で学んだ書き方です）。
 
 ```javascript
 list.addEventListener('click', (event) => {
@@ -625,6 +625,12 @@ list.addEventListener('click', (event) => {
 |---|---|
 | `Date.now()` | 現在時刻をミリ秒で表した数値。簡易的な一意のIDとして使える |
 | `Number('3')` | 文字列を数値に変換する。`dataset`や`localStorage`から読んだ値は文字列なので、数値として比べる前に変換する |
+| `new Date().toLocaleString()` | 今の日時を、使っている環境の形式の文字列にする（日本語環境では`2026/10/2 21:30:00`）。`new Date()`は今の日時を表すオブジェクト |
+| `配列.push(値)` / `配列.unshift(値)` | 配列の最後 / 先頭に追加する（05_js_basics 1節） |
+| `文字列.startsWith('文字')` | その文字で始まるか（`true`/`false`）。「タイトルが`【済】`で始まるか」のような判定に使う |
+| `要素.classList.contains('クラス名')` | その要素にクラスが付いているか。`event.target`が押されたボタンの種類を判定するときに使う（06_js_dom_events 1節） |
+| `ボタン.disabled = true` / `false` | ボタンを押せなく / 押せるようにする |
+| `配列.sort((a, b) => 比較)` | 並べ替える（元の配列が変わる）。文字列の新しい順は`b.date.localeCompare(a.date)`（制作課題の自由課題で使う） |
 
 ### 動作確認
 

@@ -170,6 +170,7 @@ CSS（Cascading Style Sheets）は、HTMLの要素に**見た目**を指定す�
 | クラス | `.card` | `class="card"`を持つ要素（**最もよく使う**） |
 | グループ化 | `h1, h2` | カンマ区切りで複数に同じスタイル |
 | 子孫 | `.box p` | `.box`の中にある`p`すべて（孫以下も）。間はスペース |
+| 複数クラス | `.button.large` | `class="button large"`のように**両方のクラスを持つ**要素。クラス名の間に**スペースを入れない**（スペースを入れると子孫セレクタになる） |
 | `:hover` | `a:hover` | マウスが乗っているとき（疑似クラスの代表） |
 | ID | `#title` | `id="title"`の要素（ページ内で1つ）。詳細度が強すぎるのでCSSでは避け、ページ内リンクやJavaScript用に使うことが多い |
 
@@ -498,9 +499,16 @@ body {
 | `line-height` | 行の高さ。**単位なしの数値**で書く（文字サイズの何倍か）。日本語の本文は1.5〜1.8が読みやすい |
 | `text-align` / `text-decoration` / `letter-spacing` | 揃え位置 / 下線など / 字間 |
 | `white-space: nowrap` + `overflow: hidden` + `text-overflow: ellipsis` | 1行に収まらない文字を「…」で省略する3点セット |
+| `text-decoration` | 線の種類と形。`none`（線なし）・`underline`（下線）のほか、`underline dotted`（点線の下線）のように「位置 形」を並べて書ける（形は`solid`・`dotted`・`dashed`・`wavy`） |
 | `background` | 背景色・`linear-gradient()`でグラデーション |
+| `linear-gradient(角度, 色1, 色2)` | 色が変わっていく背景。角度は`180deg`（上→下。省略時）・`90deg`（左→右）・`135deg`（左上→右下）。例：`linear-gradient(135deg, #3f6fd1, #7a5af8)` |
+| `border` | 枠線。`太さ 線の種類 色`の順に書く（`1px solid #e1e5eb`）。種類は`solid`（実線）・`dashed`（破線）・`dotted`（点線）。`none`で枠線なし |
+| `border-top`・`border-right`・`border-bottom`・`border-left` | 指定した**1辺だけ**に枠線を付ける。書き方は`border`と同じ（`border-left: 4px solid #3f6fd1`） |
 | `border-radius` | 角丸。`999px`でピル型、`50%`で（正方形なら）正円 |
-| `box-shadow` | 影。薄く・小さくするほど上品に見える |
+| `box-shadow` | 影。`横 縦 ぼかし 色`の順（`0 4px 12px rgb(0 0 0 / 0.1)`）。ぼかしの後ろに「広がり」の長さを足して`0 0 0 3px 色`とすると、ぼかし無しで外側に太さ3pxの輪が付く |
+| `outline` | フォーカス時などに外側に出る線。`border`と違って場所を取らない。`outline: none`で消せる（消すときは代わりのフォーカス表示を必ず付ける） |
+| `opacity` | 透明度。`1`（不透明）〜`0`（透明）。要素全体が薄くなる |
+| `cursor` | マウスカーソルの形。`pointer`（指の形）はクリックできる要素で使う |
 
 ### 動作確認
 

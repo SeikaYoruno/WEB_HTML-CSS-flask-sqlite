@@ -94,6 +94,12 @@ textarea.addEventListener('input', () => {
 | `要素.value` | 入力欄（`input`・`textarea`・`select`）に入力されている値 |
 | `要素.textContent` | 要素の中のテキストを取得・書き換える |
 | `要素.classList.toggle('クラス名', 条件)` | 条件が`true`ならクラスを付け、`false`なら外す |
+| `要素.classList.add('クラス名')` / `remove('クラス名')` | クラスを付ける / 外す（条件に関係なく） |
+| `要素.classList.contains('クラス名')` | その要素にクラスが付いているか（`true`/`false`） |
+| `要素.hidden = true` / `false` | 要素を隠す / 表示する（HTMLの`hidden`属性と同じ。見た目は`display: none`になる） |
+| `要素.style.プロパティ名 = '値'` | CSSを直接書き込む（`el.style.width = '50%'`）。`background-color`のようにハイフンのあるプロパティは`backgroundColor`とキャメルケースで書く。色や幅など、JavaScriptで計算した値を入れたいときに使い、ふだんの見た目はクラスの付け外しで切り替える |
+| `要素.disabled = true` / `false` | ボタンや入力欄を押せなく / 押せるようにする（HTMLの`disabled`属性と同じ） |
+| `要素.focus()` | その要素にフォーカス（キーボード操作の対象）を移す |
 
 ### `querySelector`：CSSのセレクタで要素を取得する
 
@@ -120,6 +126,16 @@ link.setAttribute('target', '_blank');          // 属性を追加・変更す�
 link.dataset.lang;                              // data-lang="..." の値（data-* 属性専用）
 button.setAttribute('aria-expanded', 'true');   // 制作課題のハンバーガーメニューで使う
 ```
+
+`data-*`属性は、名前のハイフンが**キャメルケース**に変わって`dataset`のプロパティになります。
+
+| HTML | JavaScript |
+|---|---|
+| `data-lang="ja"` | `el.dataset.lang` |
+| `data-tags="HTML CSS"` | `el.dataset.tags` |
+| `data-theme-color="blue"` | `el.dataset.themeColor`（`-c`が`C`に変わる） |
+
+`dataset`で読んだ値は、数字に見えても**文字列**です。
 
 ### 要素を作って追加する
 
@@ -187,6 +203,7 @@ el.innerHTML = userInput;     // <img> として解釈され、onerror のスク
 | `mouseenter` / `mouseleave` | マウスが要素に入ったとき / 出たとき（ホバー） | どの要素でも |
 | `focus` / `blur` | 要素が選ばれた（フォーカスされた）とき / 外れたとき | ボタン・リンク・入力欄 |
 | `submit` | フォームが送信されようとしたとき（ボタンのクリック・Enterキー） | `form` |
+| `reset` | フォームが初期状態に戻されようとしたとき（`type="reset"`のボタン） | `form` |
 
 ### イベントオブジェクト
 
@@ -512,8 +529,8 @@ buttons.forEach((button) => {
 |---|---|
 | 全ページで`js/script.js`を`</body>`の直前で読み込む | 05_js_basics 0 |
 | **ハンバーガーメニュー**：狭い画面ではナビゲーションを折りたたみ、☰ボタンで開閉する。`aria-expanded`も切り替える | 1・2 |
-| **一覧の絞り込み**：制作実績（または好きなもの紹介）をカテゴリやタグで絞り込むボタンを付ける。タグが複数ある項目は`data-tags="HTML/CSS JavaScript"`のように空白区切りで持たせ、`split(' ')`と`includes()`で判定する | 05_js_basics 2・3 |
-| **お問い合わせの入力チェック**：`submit`で入力をチェックし、問題があれば各欄の下にエラーを表示する。問題が無ければ「送信しました」などのメッセージを表示する（静的なサイトなので、送信自体は`preventDefault()`で止める） | 05_js_basics 1・2 |
+| **一覧の絞り込み**：制作実績（または好きなもの紹介）をカテゴリやタグで絞り込むボタンを付ける。タグが複数ある項目は`data-tags="HTML/CSS JavaScript"`のように空白区切りで持たせ、`split(' ')`と`includes()`で判定する | 3（`split`・`includes`は05_js_basics 1・2） |
+| **お問い合わせの入力チェック**：`submit`で入力をチェックし、問題があれば各欄の下にエラーを表示する。問題が無ければ「送信しました」などのメッセージを表示する（静的なサイトなので、送信自体は`preventDefault()`で止める） | 2（`trim`・三項演算子は05_js_basics 1） |
 | すべてのページを操作しても、Consoleに赤字のエラーが出ない | 05_js_basics 0 |
 
 ### 自由課題（1つ以上）

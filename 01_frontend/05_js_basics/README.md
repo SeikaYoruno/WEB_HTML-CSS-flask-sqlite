@@ -104,6 +104,8 @@ const name = 'メモ帳';
 
 JavaScriptでは、変数を使う前に`let`か`const`で宣言します（Pythonなら`x = 1`だけで使えますが、JavaScriptでは宣言が必要です）。何が変わるか分からない場合はまず`const`を使い、再代入が必要になったら`let`に変えるのが一般的です。
 
+`const`で禁止されるのは**再代入だけ**です。`const list = [];`と宣言した配列に`list.push(1)`で要素を足すのは、変数に別の値を入れ直しているわけではないので、エラーになりません。
+
 ### データ型とテンプレートリテラル
 
 ```javascript
@@ -155,6 +157,55 @@ categories.forEach((category) => {
 });
 ```
 
+### 演算子：`+=`・`++`・`&&`・`||`・`!`
+
+| 書き方 | 意味 | 例 |
+|---|---|---|
+| `a += b` | `a = a + b`の省略。`-=`・`*=`も同様 | `total += i;` |
+| `a++` / `a--` | `a`を1増やす / 1減らす | `count++;` |
+| `A && B`（かつ） | 両方が真のときだけ真 | `hasInput && !confirm('…')` |
+| `A \|\| B`（または） | どちらかが真なら真 | `selected === 'all' \|\| card.dataset.category === selected` |
+| `!A`（でない） | 真と偽を入れ替える | `!categories.includes('仕事')` |
+
+`&&`と`||`は、左から順に評価して、結果が決まった時点で右側を評価しません。
+
+### 三項演算子：`条件 ? A : B`
+
+条件が真なら`A`、偽なら`B`になる式です。`if`/`else`で値を選ぶ処理を1行で書けます。
+
+```javascript
+const label = isDone ? '完了' : '未完了';
+
+// 上は次の if / else と同じ
+let label;
+if (isDone) {
+    label = '完了';
+} else {
+    label = '未完了';
+}
+
+const grade = score >= 80 ? '合格' : '不合格';
+const text = json ? JSON.parse(json) : [];   // 値があればパースし、無ければ空の配列
+```
+
+エラー文を「問題があるときだけ入れ、無ければ空文字」にしたいときなどによく使います（`const message = title ? '' : 'タイトルを入力してください';`）。
+
+### 配列・文字列でよく使う操作
+
+| 書き方 | 説明 | 例 |
+|---|---|---|
+| `配列.length` / `文字列.length` | 要素の数 / 文字数 | `[1, 2, 3].length` → `3` |
+| `配列.push(値)` | 配列の**最後**に追加する（元の配列が変わる） | `list.push('仕事')` |
+| `配列.unshift(値)` | 配列の**先頭**に追加する（元の配列が変わる） | `list.unshift('家事')` |
+| `配列.indexOf(値)` | 値が何番目にあるか（0始まり）。**無ければ`-1`** | `['a', 'b'].indexOf('b')` → `1` |
+| `文字列.trim()` | 前後の空白・改行を取り除く | `'  メモ '.trim()` → `'メモ'` |
+| `文字列.split(区切り)` | 区切り文字で分けた配列にする | `'HTML CSS'.split(' ')` → `['HTML', 'CSS']` |
+| `文字列.slice(開始, 終了)` | 開始〜終了の手前までを取り出す | `'銀河鉄道'.slice(0, 2)` → `'銀河'` |
+| `文字列.startsWith(文字)` | その文字で始まるか（`true`/`false`） | `'【済】買い物'.startsWith('【済】')` → `true` |
+| `Math.floor(数値)` | 小数点以下を切り捨てる | `Math.floor(3.9)` → `3` |
+
+`includes()`は2節で学びます。`NodeList`（`querySelectorAll`の結果）には`indexOf`が無いので、使いたいときは`Array.from(NodeList)`で配列に変換します（[07_js_ui](../07_js_ui/)のタブで使います）。
+
 ### `null`と`undefined`
 
 ```javascript
@@ -189,6 +240,8 @@ if (input.value.trim()) {
     // 空白を除いて1文字以上入力されているときだけ実行される
 }
 ```
+
+値が truthy か falsy かは、`Boolean(値)`で`true`/`false`に変換して確かめられます（`Boolean('')` → `false`、`Boolean('0')` → `true`、`Boolean([])` → `true`）。
 
 複数のページで同じ`script.js`を読み込むと（制作課題のHPのように）、ページによっては要素が無く`null`になります。`if (要素)`はこの性質を使った「要素があるときだけ処理する」書き方です。
 

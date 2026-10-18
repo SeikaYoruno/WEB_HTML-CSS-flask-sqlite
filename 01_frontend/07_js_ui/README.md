@@ -93,7 +93,11 @@ const selectTab = (selected) => {
 | `aria-selected="true"` | 選ばれているタブであることを、読み上げソフトに伝える。CSSでは`[aria-selected="true"]`で見た目を変える |
 | `aria-controls="パネルのid"` | そのタブが、どのパネルを切り替えるか。JavaScriptではこれをたどってパネルを探す |
 | `role="tablist"` / `"tab"` / `"tabpanel"` | 「これはタブだ」という役割を伝える（HTMLにタブ専用のタグが無いため） |
-| ← → キーでの移動 | タブの一般的な操作方法。`keydown`で`event.key`が`'ArrowRight'`・`'ArrowLeft'`のときに隣のタブを選ぶ |
+| ← → キーでの移動 | タブの一般的な操作方法。`keydown`で`event.key`が`'ArrowRight'`・`'ArrowLeft'`のときに隣のタブを選ぶ。最初・最後へは`'Home'`・`'End'`。そのほかのキー名は`'ArrowUp'`・`'ArrowDown'`・`'Escape'`・`' '`（スペース）など |
+| `tabIndex`（`tabindex`属性） | Tabキーで移動できるかを決める数値。`0`＝Tabキーで止まる、`-1`＝Tabキーでは飛ばす（JavaScriptの`focus()`では選べる）。タブでは、選ばれているタブだけ`0`、ほかを`-1`にして、Tabキーで次の部品へ進み、タブの間は矢印キーで動くようにする |
+| `document.activeElement` | 今フォーカスされている要素。`tabs.indexOf(document.activeElement)`で「何番目のタブにフォーカスがあるか」がわかる |
+| `配列.indexOf(要素)` と `Array.from()` | 何番目か（0始まり）を調べる。`querySelectorAll`が返す`NodeList`には`indexOf`が無いので、`Array.from(...)`で配列に変えてから使う（05_js_basics 1節） |
+| `要素.focus()` | フォーカスを移す。矢印キーで選んだタブに、見た目だけでなくキーボードの操作対象も移すために呼ぶ |
 
 06_js_dom_events 3節の絞り込みと同じく、「選ばれたものに印を付け、それ以外から外す」という考え方です。クラスの代わりに`aria-selected`と`hidden`を使うと、見た目とアクセシビリティを同時に扱えます。
 
@@ -459,6 +463,8 @@ document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
 | `window.scrollY` | ページの一番上から、何pxスクロールしたか |
 | `document.documentElement.scrollHeight` / `window.innerHeight` | ページ全体の高さ / 画面に見えている部分の高さ。差がスクロールできる最大の量 |
 | `scroll`イベント | スクロール中に何度も（1秒に数十回）発生する。中の処理は、クラスの付け外しなど軽いものにする |
+| `Math.floor(数値)` | 小数点以下を切り捨てる。読了率を整数のパーセントで表示するときに使う（`Math.floor(3.9)` → `3`） |
+| `要素.style.width = '50%'` | JavaScriptでCSSを直接書き込む。計算した幅や色を入れるときに使う（06_js_dom_events 1節） |
 | `window.scrollTo({ top, behavior: 'smooth' })` | 指定した位置までスクロールする |
 | `要素.scrollIntoView({ behavior: 'smooth' })` | その要素が見える位置までスクロールする |
 | `IntersectionObserver` | 要素が画面に入った・出たときだけ知らせてくれる。「画面に入ったら〜する」は、`scroll`イベントで位置を計算するより、こちらの方が軽くて簡単 |
